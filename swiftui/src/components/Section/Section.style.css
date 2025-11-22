@@ -1,0 +1,15 @@
+.swiftui-section {
+  margin-bottom: 16px;
+}
+
+.swiftui-section__header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.swiftui-section__footer {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}

@@ -1,0 +1,57 @@
+import React from 'react';
+import { TextProps } from './types';
+import './Text.style.css';
+
+import { getFrame } from '../../utils/frame';
+import { getPadding } from '../../utils/padding';
+import { getBorder } from '../../utils/border';
+import { getCornerRadius } from '../../utils/cornerRadius';
+import { getShadow } from '../../utils/shadow';
+import { getTransform } from '../../utils/transform';
+import { getFont } from '../../utils/fonts';
+
+export const Text: React.FC<TextProps> = ({
+  children,
+  className,
+  style,
+  // Modifiers
+  frame,
+  padding,
+  border,
+  cornerRadius,
+  shadow,
+  scaleEffect,
+  rotationEffect,
+  opacity,
+  hidden,
+  fontSize,
+  fontWeight,
+  font,
+  bold,
+  italic,
+  strikethrough,
+  underline,
+  // ... другие модификаторы
+}) => {
+  const modifierStyles: React.CSSProperties = {
+    ...getFrame(frame),
+    ...getPadding(padding),
+    ...getBorder(border),
+    ...getCornerRadius(cornerRadius),
+    ...getShadow(shadow),
+    ...getTransform(scaleEffect, rotationEffect),
+    ...(opacity !== undefined && { opacity }),
+    ...(hidden && { display: 'none' }),
+    ...getFont(font, fontSize, fontWeight, italic),
+    ...(bold && { fontWeight: 'bold' }),
+    ...(strikethrough && { textDecoration: 'line-through' }),
+    ...(underline && { textDecoration: 'underline' }),
+    // ... другие стили модификаторов
+  };
+
+  return (
+    <span className={['swiftui-text', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
+      {children}
+    </span>
+  );
+};

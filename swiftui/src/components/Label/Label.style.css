@@ -1,0 +1,10 @@
+.Label {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Расстояние между изображением и текстом */
+}
+
+.Label-title {
+  font-size: 16px;
+  color: #333;
+}

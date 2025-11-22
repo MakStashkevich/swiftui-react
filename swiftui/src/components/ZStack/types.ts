@@ -1,16 +1,9 @@
 import React from 'react';
+import { Modifiers } from '../../utils/modifiers';
+import { ZStackAlignment } from '../../utils/alignments';
 
 export type ZStackProps = {
-  alignment?:
-    | 'topLeading'
-    | 'top'
-    | 'topTrailing'
-    | 'leading'
-    | 'center'
-    | 'trailing'
-    | 'bottomLeading'
-    | 'bottom'
-    | 'bottomTrailing';
+  alignment?: ZStackAlignment;
   style?: React.CSSProperties;
   children?: React.ReactNode;
-};
+} & Modifiers;

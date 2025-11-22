@@ -1,0 +1,18 @@
+import { Color } from '../colors';
+import React from 'react';
+
+export type Border = {
+  color?: Color;
+  width?: number;
+};
+
+export const getBorder = (border?: Border): React.CSSProperties | null => {
+  if (!border) return null;
+  return {
+    ...(border.color && {
+      borderColor: border.color,
+      borderStyle: 'solid', // Добавляем стиль границы по умолчанию
+    }),
+    ...(border.width && { borderWidth: border.width }),
+  };
+};
