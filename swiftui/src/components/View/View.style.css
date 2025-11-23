@@ -1,0 +1,10 @@
+.View {
+    margin: 0 auto;
+    min-width: 320px; /* min-w-mobile-se */
+    max-width: 768px; /* max-w-tablet-base */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--swiftui-double-gap);
+}

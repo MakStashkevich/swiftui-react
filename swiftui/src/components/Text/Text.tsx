@@ -50,7 +50,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <span className={['swiftui-text', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
+    <span className={['Text', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
       {children}
     </span>
   );

@@ -16,7 +16,8 @@
     "./dist/types/*": "./dist/types/*"
   },
   "scripts": {
-    "build": "rm -rf ./dist && rollup -c rollup.config.mjs"
+    "build": "rm -rf ./dist && cross-env NODE_ENV=production rollup -c rollup.config.mjs",
+    "dev": "rollup -c rollup.config.mjs --watch"
   },
   "keywords": [
     "react",
@@ -37,6 +38,7 @@
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.22",
     "classnames": "^2.5.1",
+    "cross-env": "^10.1.0",
     "glob": "^13.0.0",
     "postcss": "^8.5.6",
     "rollup": "^4.53.3",

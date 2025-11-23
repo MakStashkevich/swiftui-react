@@ -1,7 +1,7 @@
 .List {
-  /* Базовые стили для списка */
-  list-style: none; /* Убираем маркеры списка */
+  list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
+  height: var(--content-safe-area);
 }

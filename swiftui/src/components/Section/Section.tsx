@@ -40,10 +40,10 @@ export const Section: React.FC<SectionProps> = ({
   };
 
   return (
-    <section className={['swiftui-section', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
-      {header && <div className="swiftui-section__header">{header}</div>}
-      <div className="swiftui-section__content">{children}</div>
-      {footer && <div className="swiftui-section__footer">{footer}</div>}
+    <section className={['Section', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
+      {header && <div className="Section__header">{header}</div>}
+      <div className="Section__content">{children}</div>
+      {footer && <div className="Section__footer">{footer}</div>}
     </section>
   );
 };

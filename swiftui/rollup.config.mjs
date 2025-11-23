@@ -27,18 +27,20 @@ const clientDirectivePlugin = () => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const componentsDir = path.resolve(__dirname, 'src/components');
-const entryPoints = globSync(`${componentsDir}/**/*.{ts,tsx}`).filter(
-  (file) => !file.endsWith('.d.ts') && !file.endsWith('types.ts')
-);
-
-// Добавляем index.ts как точку входа
-entryPoints.push(path.resolve(__dirname, 'src/index.ts'));
+const entryPoints = [
+  ...globSync(`${path.resolve(__dirname, 'src/components')}/**/index.ts`),
+  ...globSync(`${path.resolve(__dirname, 'src/utils')}/**/index.ts`),
+  ...globSync(`${path.resolve(__dirname, 'src/hooks')}/**/index.ts`),
+  path.resolve(__dirname, 'src/global.css'),
+  path.resolve(__dirname, 'src/index.ts'), // Добавляем index.ts как точку входа
+];
 
 // Создаем директорию dist, если ее нет
 if (!fs.existsSync(path.resolve(__dirname, 'dist'))) {
   fs.mkdirSync(path.resolve(__dirname, 'dist'));
 }
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
   input: entryPoints,
@@ -50,6 +52,13 @@ export default {
       preserveModules: true,
       preserveModulesRoot: 'src',
       entryFileNames: '[name].js',
+      exports: 'named',
+      interop: 'auto',
+      globals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        'react/jsx-runtime': 'jsxRuntime',
+      },
     },
     {
       dir: 'dist',
@@ -59,6 +68,12 @@ export default {
       preserveModulesRoot: 'src',
       entryFileNames: '[name].cjs',
       exports: 'named',
+      interop: 'auto',
+      globals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        'react/jsx-runtime': 'jsxRuntime',
+      },
     },
   ],
   plugins: [
@@ -72,7 +87,7 @@ export default {
       rootDir: 'src',
     }),
     postcss({
-      extract: 'index.css', // Извлекает все CSS в один файл index.css
+      extract: isProduction ? 'index.css' : false, // Извлекает CSS только в продакшн-режиме
       modules: {
         generateScopedName: '[name]__[local]___[hash:base64:5]',
         getJSON: (cssFileName, json) => {
@@ -82,8 +97,14 @@ export default {
         },
       },
       plugins: [autoprefixer()],
-      minimize: true,
+      minimize: isProduction, // Минимизирует CSS только в продакшн-режиме
+      sourceMap: true,
+      inject: true,
     }),
   ],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
+  watch: {
+    include: 'src/**',
+    exclude: 'node_modules/**',
+  },
 };
