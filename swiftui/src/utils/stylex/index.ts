@@ -1,65 +1,71 @@
 import * as stylex from '@stylexjs/stylex';
 
-type SXArg =
+// допустимые типы аргументов
+type SXInput =
   | null
   | undefined
+  | false
   | string
   | Record<string, any>;
 
-export function sx(...args: SXArg[]) {
+export function sx(...args: SXInput[]) {
     const finalProps: Record<string, any> = {};
-    const classNames: string[] = [];
-    const styles: Record<string, any>[] = [];
+    const stylexArgs: any[] = [];
+    const userClasses: string[] = [];
+    const userStyles: Record<string, any>[] = [];
 
     for (const arg of args) {
         if (!arg) continue;
 
-        // 1. Строки -> className
+        // аргумент — строка? тогда это пользовательский класс
         if (typeof arg === 'string') {
-            classNames.push(arg);
+            userClasses.push(arg);
             continue;
         }
 
-        // 2. Обычный объект (НЕ массив)
+        // аргумент — объект
         if (typeof arg === 'object' && !Array.isArray(arg)) {
             // Проверяем: это stylex объект?
-            // stylex.props(arg) бросает ошибку, если arg не stylex-стиль -> оборачиваем в try
+            // Если stylex.props(arg) не падает — значит можно использовать
             try {
-                const sxProps = stylex.props(arg);
-
-                if (sxProps.className) classNames.push(sxProps.className);
-                if (sxProps.style) styles.push(sxProps.style);
-
-                continue;
+                const sx = stylex.props(arg);
+                // Если вернуло stylex className - это стиль stylex
+                if (sx && typeof sx.className === 'string') {
+                    stylexArgs.push(arg);
+                    continue;
+                }
             } catch (_) {
-                // Не stylex -> обычный объект пропсов
+                // не stylex объект — идём ниже
             }
 
-            // className от пользователя
-            if (typeof arg.className === 'string') {
-                classNames.push(arg.className);
-            }
+            // Пользовательские пропсы
+            if (arg.className) userClasses.push(arg.className);
+            if (arg.style) userStyles.push(arg.style);
 
-            // user inline styles
-            if (typeof arg.style === 'object') {
-                styles.push(arg.style);
-            }
-
-            // Остальные пропсы
             Object.assign(finalProps, arg);
-
             continue;
         }
-
-        // 3. А массивы просто игнорируем
     }
 
-    if (classNames.length > 0) {
-        finalProps.className = classNames.join(' ');
+    // Сначала собираем stylex стили (они объединяются правильно)
+    const sx = stylex.props(...stylexArgs);
+
+    // Финальный класс
+    const classNameList = [
+        sx.className,
+        ...userClasses,
+    ].filter(Boolean);
+
+    if (classNameList.length > 0) {
+        finalProps.className = classNameList.join(' ');
     }
 
-    if (styles.length > 0) {
-        finalProps.style = Object.assign({}, ...styles);
+    // Финальный style
+    if (sx.style || userStyles.length > 0) {
+        finalProps.style = {
+            ...(sx.style || {}),
+            ...Object.assign({}, ...userStyles),
+        };
     }
 
     return finalProps;
