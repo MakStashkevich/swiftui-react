@@ -1,8 +1,0 @@
-.swiftui-vstack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Default alignment for VStack */
-  justify-content: flex-start; /* Default justification for VStack */
-  width: 100%;
-  height: 100%;
-}

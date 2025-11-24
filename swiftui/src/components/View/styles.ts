@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex';
 
-export const s = stylex.create({
-    View: {
+const styles = stylex.create({
+    container: {
         margin: '0 auto',
         minWidth: '320px',
         maxWidth: '768px',
@@ -12,3 +12,5 @@ export const s = stylex.create({
         gap: 'var(--swiftui-double-gap)',
     },
 });
+
+export default styles;

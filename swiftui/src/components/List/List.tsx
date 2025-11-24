@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListProps } from './types';
-import './List.style.css';
+import styles from './styles';
 
 import { getFrame } from '../../utils/frame';
 import { getPadding } from '../../utils/padding';
@@ -8,6 +8,7 @@ import { getBorder } from '../../utils/border';
 import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
+import { sx } from '../../utils/stylex';
 
 export const List: React.FC<ListProps> = ({
   children,
@@ -37,7 +38,7 @@ export const List: React.FC<ListProps> = ({
   };
 
   return (
-    <div className="List" style={{ ...style, ...modifierStyles }}>
+    <div {...sx(styles.container)} style={{ ...style, ...modifierStyles }}>
       {children}
     </div>
   );

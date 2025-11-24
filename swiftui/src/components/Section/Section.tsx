@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionProps } from './types';
-import './Section.style.css';
+import styles from './styles';
 
 import { getFrame } from '../../utils/frame';
 import { getPadding } from '../../utils/padding';
@@ -8,6 +8,7 @@ import { getBorder } from '../../utils/border';
 import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
+import { sx } from '../../utils/stylex';
 
 export const Section: React.FC<SectionProps> = ({
   children,
@@ -40,10 +41,10 @@ export const Section: React.FC<SectionProps> = ({
   };
 
   return (
-    <section className={['Section', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
-      {header && <div className="Section__header">{header}</div>}
-      <div className="Section__content">{children}</div>
-      {footer && <div className="Section__footer">{footer}</div>}
+    <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
+      {header && <div {...sx(styles.header)}>{header}</div>}
+      <div {...sx(styles.content)}>{children}</div>
+      {footer && <div {...sx(styles.footer)}>{footer}</div>}
     </section>
   );
 };

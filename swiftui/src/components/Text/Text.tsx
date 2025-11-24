@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextProps } from './types';
-import './Text.style.css';
+import styles from './styles';
 
 import { getFrame } from '../../utils/frame';
 import { getPadding } from '../../utils/padding';
@@ -9,6 +9,7 @@ import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
 import { getFont } from '../../utils/fonts';
+import { sx } from '../../utils/stylex';
 
 export const Text: React.FC<TextProps> = ({
   children,
@@ -50,7 +51,7 @@ export const Text: React.FC<TextProps> = ({
   };
 
   return (
-    <span className={['Text', className].filter(Boolean).join(' ')} style={{ ...style, ...modifierStyles }}>
+    <span {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
       {children}
     </span>
   );
