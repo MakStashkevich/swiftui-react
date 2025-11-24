@@ -9,6 +9,8 @@ import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
+import { textColorDefaultSubtitle } from '../../utils/stylex/themes';
+import { sxChild } from '../../utils/stylex/children';
 
 export const Section: React.FC<SectionProps> = ({
   children,
@@ -42,9 +44,15 @@ export const Section: React.FC<SectionProps> = ({
 
   return (
     <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
-      {header && <div {...sx(styles.header)}>{header}</div>}
-      <div {...sx(styles.content)}>{children}</div>
-      {footer && <div {...sx(styles.footer)}>{footer}</div>}
+      {header && <div {...sx(styles.header, textColorDefaultSubtitle)}>{header}</div>}
+      <div {...sx(styles.content)}>
+        {
+          sxChild(children, styles.contentChildrenAll)
+            .last(styles.contentChildrenLast)
+            .render()
+        }
+      </div>
+      {footer && <div {...sx(styles.footer, textColorDefaultSubtitle)}>{footer}</div>}
     </section>
   );
 };

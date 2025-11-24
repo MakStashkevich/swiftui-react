@@ -1,4 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
+import { safeArea } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
   container: {
@@ -6,7 +7,7 @@ const styles = stylex.create({
     padding: 0,
     margin: 0,
     width: '100%',
-    height: 'var(--content-safe-area)',
+    height: safeArea.content,
   },
 });
 

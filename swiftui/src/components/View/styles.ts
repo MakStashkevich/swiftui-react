@@ -1,4 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
+import { spacing } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
     container: {
@@ -9,7 +10,7 @@ const styles = stylex.create({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        gap: 'var(--swiftui-double-gap)',
+        gap: spacing.doubleGap,
     },
 });
 

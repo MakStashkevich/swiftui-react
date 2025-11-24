@@ -1,27 +1,26 @@
 import * as stylex from '@stylexjs/stylex';
+import { color, fontSize, spacing } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
     container: {
-        padding: 'var(--swiftui-section-block-padding) var(--swiftui-section-inline-padding)',
+        padding: spacing.section,
     },
     header: {
-        padding: 'var(--swiftui-cell-block-padding) var(--swiftui-cell-inline-padding)',
-        fontSize: 'var(--swiftui-subtitle-font-size)',
-        color: 'var(--swiftui-subtitle-text-color)',
+        padding: spacing.cell,
+        fontSize: fontSize.subtitle,
     },
     footer: {
-        padding: 'var(--swiftui-cell-block-padding) var(--swiftui-cell-inline-padding)',
-        fontSize: 'var(--swiftui-subtitle-font-size)',
-        color: 'var(--swiftui-subtitle-text-color)',
+        padding: spacing.cell,
+        fontSize: fontSize.subtitle,
     },
     content: {
-        borderRadius: 'var(--swiftui-radius)',
-        padding: 'var(--swiftui-cell-block-padding) var(--swiftui-cell-inline-padding)',
+        borderRadius: spacing.radius,
+        padding: spacing.cell,
         overflow: 'hidden',
         position: 'relative',
         isolation: 'isolate',
         ':before': {
-            backgroundColor: 'var(--swiftui-section-bg-color)',
+            backgroundColor: color.sectionBg,
             borderRadius: 'inherit',
             content: "",
             inset: 0,
@@ -30,10 +29,10 @@ const styles = stylex.create({
             zIndex: -1,
         },
     },
-    content_children: {
+    contentChildrenAll: {
         '--swiftui-cell-separator-height': '1px',
     },
-    content_children_last: {
+    contentChildrenLast: {
         '--swiftui-cell-separator-height': '0',
     },
 });
