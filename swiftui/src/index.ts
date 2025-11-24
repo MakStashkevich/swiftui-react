@@ -1,4 +1,4 @@
-import './global.css';
+import './globals.css';
 
 // Provider
 export * from './components/View';

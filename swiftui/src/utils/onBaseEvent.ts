@@ -1,9 +1,8 @@
 import React from 'react';
-import { Modifiers } from './modifiers';
 
 export function onBaseEvent(
   e: React.SyntheticEvent,
-  modifiers: Modifiers,
+  // modifiers: Modifiers,
   extraEvents?: {
     [key: string]: (e?: React.SyntheticEvent) => void;
   }

@@ -1,5 +1,4 @@
 import * as stylex from '@stylexjs/stylex';
-import React from 'react';
 
 // допустимые типы аргументов
 type SXInput =

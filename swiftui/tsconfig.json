@@ -25,5 +25,6 @@
     "emitDeclarationOnly": true
   },
   "include": ["src"],
+  "exclude": ["src/components/__uncompleted/**"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

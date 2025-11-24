@@ -1,4 +1,4 @@
-import { Form, View, Text, Section } from "@makstashkevich/swiftui-react";
+import { Form, Text, Section } from "@makstashkevich/swiftui-react";
 
 export default function Home() {
   return (
@@ -10,8 +10,6 @@ export default function Home() {
       </Section>
       <Section>
         <Text>Test 1</Text>
-        <Text>Test 2</Text>
-        <Text>Test 3</Text>
       </Section>
     </Form>
   );

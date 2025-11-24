@@ -16,8 +16,9 @@
     "./dist/types/*": "./dist/types/*"
   },
   "scripts": {
-    "build": "rm -rf ./dist && cross-env NODE_ENV=production rollup -c rollup.config.mjs",
-    "dev": "rollup -c rollup.config.mjs --watch"
+    "prebuild": "rm -rf ./dist",
+    "build": "cross-env NODE_ENV=production rollup -c rollup.config.mjs",
+    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.mjs --watch"
   },
   "keywords": [
     "react",
@@ -35,11 +36,11 @@
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@stylexjs/babel-plugin": "^0.17.0",
     "@stylexjs/rollup-plugin": "^0.17.0",
+    "@stylexjs/stylex": "^0.17.0",
     "@swc/core": "^1.15.3",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.22",
-    "classnames": "^2.5.1",
     "cross-env": "^10.1.0",
     "csso": "^5.0.5",
     "glob": "^13.0.0",
@@ -47,12 +48,8 @@
     "rollup": "^4.53.3",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-swc3": "^0.12.1",
+    "rollup-plugin-typescript2": "^0.36.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "@stylexjs/stylex": "^0.17.0",
-    "clsx": "^2.1.1",
-    "rollup-plugin-preserve-directives": "^0.4.0"
   }
 }

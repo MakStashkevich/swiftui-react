@@ -9,6 +9,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { SourceMapGenerator } from 'source-map';
+import typescript from 'rollup-plugin-typescript2';
 import * as csso from 'csso';
 
 const clientDirectivePlugin = () => {
@@ -115,7 +116,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const entryPoints = [
-  ...globSync(`${path.resolve(__dirname, 'src/components')}/**/index.ts`),
+  ...globSync(`${path.resolve(__dirname, 'src/components')}/!(**/__uncompleted)/**/index.ts`),
   ...globSync(`${path.resolve(__dirname, 'src/utils')}/**/index.ts`),
   ...globSync(`${path.resolve(__dirname, 'src/hooks')}/**/index.ts`),
   path.resolve(__dirname, 'src/index.ts'), // Добавляем index.ts как точку входа
@@ -163,6 +164,10 @@ export default {
     },
   ],
   plugins: [
+    typescript({
+      tsconfig: "tsconfig.json",
+      clean: true
+    }),
     clientDirectivePlugin(),
     resolve(),
     commonjs(),

@@ -28,6 +28,9 @@ const styles = stylex.create({
             willChange: 'transform',
             zIndex: -1,
         },
+
+        display: 'flex',
+        flexDirection: 'column',
     },
     contentChildrenAll: {
         '--swiftui-cell-separator-height': '1px',
