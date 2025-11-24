@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@makstashkevich/swiftui-react/dist/index.css";
+@import "@makstashkevich/swiftui-react/dist/globals.css";
 
 :root {
   --background: #ffffff;

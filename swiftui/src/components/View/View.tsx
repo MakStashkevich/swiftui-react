@@ -1,7 +1,8 @@
 import React from 'react';
 import { Attribute, ViewProviderProps, ViewScriptProps, UseViewProps } from './types';
 import { script } from './script';
-import './View.style.css';
+import { s } from './View.stylex';
+import * as stylex from '@stylexjs/stylex';
 
 const defaultThemeVersion = '18.5'
 const attributeVersion = 'data-swiftui-ios'
@@ -199,7 +200,7 @@ export const View = ({
           attributeVersion,
         }}
       />
-      <div id="root" className="View">
+      <div id="root" {...stylex.props(s.View)}>
         {children}
       </div>
     </ViewContext.Provider>

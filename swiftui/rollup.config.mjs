@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import swc from 'rollup-plugin-swc3';
+import stylexPlugin from '@stylexjs/rollup-plugin';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import { globSync } from 'glob';
@@ -8,6 +9,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { SourceMapGenerator } from 'source-map';
+import * as csso from 'csso';
 
 const clientDirectivePlugin = () => {
   return {
@@ -44,6 +46,66 @@ const clientDirectivePlugin = () => {
         code: newCode,
         map: map.toString(),
       };
+    },
+  };
+};
+
+const clientMergeGlobalsCss = ({
+  inputFiles = ['dist/index.css', 'dist/stylex.css'],
+  outputFile = 'globals.css',
+  format = '.css',
+  minify = true,
+  debugFileComments = true,
+}) => {
+  return {
+    name: 'merge-globals-css',
+    writeBundle() {
+      if (inputFiles.length === 0) {
+        console.log('No input files specified for CSS merging. Skipping.');
+        return;
+      }
+
+      let mergedContent = '';
+
+      if (inputFiles.length === 1) {
+        const filePath = path.resolve(__dirname, inputFiles[0]);
+        if (!fs.existsSync(filePath)) {
+          console.warn(`File not found: ${filePath}`);
+          return;
+        }
+        if (!filePath.endsWith(format)) {
+          console.warn(`File ${filePath} does not match the expected format ${format}`);
+          return;
+        }
+        let content = fs.readFileSync(filePath, 'utf-8');
+        if (debugFileComments) {
+          content = `/** ${inputFiles[0]} start */\n${content}\n/** ${inputFiles[0]} end */`;
+        }
+        mergedContent = content;
+      } else {
+        mergedContent = inputFiles.reduce((acc, file) => {
+          const filePath = path.resolve(__dirname, file);
+          if (!fs.existsSync(filePath)) {
+            console.warn(`File not found: ${filePath}`);
+            return acc;
+          }
+          if (!filePath.endsWith(format)) {
+            console.warn(`File ${filePath} does not match the expected format ${format}`);
+            return acc;
+          }
+          let content = fs.readFileSync(filePath, 'utf-8');
+          if (debugFileComments) {
+            content = `/** ${file} start */\n${content}\n/** ${file} end */`;
+          }
+          return acc + content + '\n';
+        }, '');
+      }
+
+      const outputPath = path.resolve(__dirname, 'dist', outputFile);
+
+      const finalContent = minify && isProduction ? csso.minify(mergedContent).css : mergedContent;
+
+      fs.writeFileSync(outputPath, finalContent);
     },
   };
 };
@@ -118,6 +180,17 @@ export default {
       },
       sourceMaps: true,
     }),
+    stylexPlugin({
+      fileName: 'stylex.css',
+      use: ['react'],
+      useCSSLayers: true,
+      classNamePrefix: 'swiftui-',
+      dev: !isProduction,
+      unstable_moduleResolution: {
+        type: 'commonJS',
+        rootDir: __dirname,
+      },
+    }),
     postcss({
       extract: 'index.css',
       modules: {
@@ -129,9 +202,16 @@ export default {
         },
       },
       plugins: [autoprefixer()],
-      minimize: isProduction, // Минимизирует CSS только в продакшн-режиме
+      minimize: false, // Не минимизируем тк будет минимизация после слияния файлов
       sourceMap: true,
       inject: false,
+    }),
+    clientMergeGlobalsCss({
+      inputFiles: ['dist/index.css', 'dist/stylex.css'],
+      outputFile: 'globals.css',
+      format: '.css',
+      minify: isProduction, // А вот здесь уже минимизируем конечный файл
+      debugFileComments: !isProduction,
     }),
   ],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
