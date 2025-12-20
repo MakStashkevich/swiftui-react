@@ -9,7 +9,7 @@ import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
-import { textColorDefaultSubtitle } from '../../utils/stylex/themes';
+import { fontHeightDefaultSubtitle, fontSizeDefaultSubtitle, textColorDefaultSubtitle } from '../../utils/stylex/themes';
 import { sxChild } from '../../utils/stylex/children';
 
 export const Section: React.FC<SectionProps> = ({
@@ -44,15 +44,28 @@ export const Section: React.FC<SectionProps> = ({
 
   return (
     <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
-      {header && <div {...sx(styles.header, textColorDefaultSubtitle)}>{header}</div>}
+      {header && <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle)}>{header}</div>}
       <div {...sx(styles.content)}>
         {
-          sxChild(children, styles.contentChildrenAll)
-            .last(styles.contentChildrenLast)
-            .render()
+          sxChild(children)
+            // .last(styles.contentChildrenLast)
+            .render((child, i, len) => (
+              <div {...sx(styles.row, (i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast))}> {/* block relative */}
+                <div {...sx(styles.rowLine)}> {/* flex flex-row items-center */}
+                  {/* Icon */}
+                  {/* Text & shevron */}
+                  <div {...sx(styles.separator)}> {/* separator */}
+                    <div {...sx(styles.block)}>{/* min-w-0 max-w-full flex flex-col flex-1 items-start justify-center min-h-11 py-2.5 */}
+                      {/* body */}
+                      {child}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
         }
       </div>
-      {footer && <div {...sx(styles.footer, textColorDefaultSubtitle)}>{footer}</div>}
+      {footer && <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle)}>{footer}</div>}
     </section>
   );
 };

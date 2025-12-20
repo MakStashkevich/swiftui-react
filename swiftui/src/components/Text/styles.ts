@@ -1,9 +1,10 @@
 import * as stylex from '@stylexjs/stylex';
-import { fontSize, textColor } from '../../utils/stylex/tokens.stylex';
+import { fontHeight, fontSize, textColor } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
     container: {
         fontSize: fontSize.default,
+        lineHeight: fontHeight.default,
         color: textColor.default,
     },
 });

@@ -1,21 +1,23 @@
 import * as stylex from '@stylexjs/stylex';
-import { color, fontSize, spacing } from '../../utils/stylex/tokens.stylex';
+import { color, spacing } from '../../utils/stylex/tokens.stylex';
+
+const minDevicePixelRatio2 = '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx)';
+const minDevicePixelRatio3 = '@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx)';
 
 const styles = stylex.create({
     container: {
-        padding: spacing.section,
+        paddingInline: spacing.sectionInline,
     },
     header: {
-        padding: spacing.cell,
-        fontSize: fontSize.subtitle,
+        paddingBottom: spacing.sectionHeaderBottom,
+        paddingInline: spacing.sectionHeaderInline,
     },
     footer: {
-        padding: spacing.cell,
-        fontSize: fontSize.subtitle,
+        paddingTop: spacing.sectionFooterTop,
+        paddingInline: spacing.sectionFooterInline,
     },
     content: {
         borderRadius: spacing.radius,
-        padding: spacing.cell,
         overflow: 'hidden',
         position: 'relative',
         isolation: 'isolate',
@@ -38,6 +40,62 @@ const styles = stylex.create({
     contentChildrenLast: {
         '--swiftui-cell-separator-height': '0',
     },
+    row: {
+        display: 'block',
+        position: 'relative',
+    },
+    rowLine: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    separator: {
+        alignItems: 'center',
+        display: 'flex',
+        flexGrow: '1',
+        justifyContent: 'space-between',
+        marginInlineStart: spacing.cellInline,
+        maxWidth: '100%',
+        minWidth: '0',
+        position: 'relative',
+        ':after': {
+            backgroundColor: color.sectionSeparator,
+            bottom: '0',
+            content: '',
+            height: 'var(--swiftui-cell-separator-height)',
+            insetInlineStart: 0,
+            position: 'absolute',
+            transformOrigin: 'bottom left',
+            width: '100%',
+            willChange: 'transform',
+            transform: {
+                default: 'scaleY(.33)',
+                [minDevicePixelRatio2]: 'scaleY(.5)',
+                [minDevicePixelRatio3]: 'scaleY(.33)',
+            },
+        },
+        ':before': {
+            backgroundColor: color.sectionSeparator,
+            content: '',
+            height: 'var(--swiftui-cell-block-separator-height)',
+            insetInlineStart: '0',
+            position: 'absolute',
+            top: '0',
+            transformOrigin: 'top left',
+            width: '100%',
+            willChange: 'transform',
+            transform: {
+                default: 'scaleY(.33)',
+                [minDevicePixelRatio2]: 'scaleY(.5)',
+                [minDevicePixelRatio3]: 'scaleY(.33)',
+            },
+        }
+    },
+    block: {
+        minHeight: 'var(--swiftui-cell-min-height)',
+        paddingBlock: spacing.cellBlock,
+        display: 'block',
+    }
 });
 
 export default styles;

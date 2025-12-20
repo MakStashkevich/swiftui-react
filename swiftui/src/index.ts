@@ -11,7 +11,10 @@ export * from './components/Section';
 // Text
 export * from './components/Text';
 
-// export * from './components/ZStack';
+export * from './components/HStack';
+export * from './components/VStack';
+export * from './components/ZStack';
+
 // export * from './components/Button';
 // export * from './components/Color';
 // export * from './components/ColorPicker';
@@ -20,7 +23,6 @@ export * from './components/Text';
 // export * from './components/Divider';
 // export * from './components/GeometryReader';
 // export * from './components/Group';
-// export * from './components/HStack';
 // export * from './components/Image';
 // export * from './components/Label';
 // export * from './components/Menu';
@@ -32,7 +34,6 @@ export * from './components/Text';
 // export * from './components/Stepper';
 // export * from './components/TextField';
 // export * from './components/Toggle';
-// export * from './components/VStack';
 
 export * from './utils/onBaseEvent';
 export * from './utils/alert';

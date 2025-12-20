@@ -1,0 +1,61 @@
+import React from 'react';
+import { ZStackProps } from './types';
+import styles from './styles';
+
+import { getFrame } from '../../utils/frame';
+import { getPadding } from '../../utils/padding';
+import { getBorder } from '../../utils/border';
+import { getCornerRadius } from '../../utils/cornerRadius';
+import { getShadow } from '../../utils/shadow';
+import { getTransform } from '../../utils/transform';
+import { getAlignment } from '../../utils/alignments';
+import { sx } from '../../utils/stylex';
+import { sxChild } from '../../utils/stylex/children';
+
+export const ZStack: React.FC<ZStackProps> = ({
+  alignment = 'center',
+  children,
+  style,
+  className,
+  // Modifiers
+  frame,
+  padding,
+  border,
+  cornerRadius,
+  shadow,
+  scaleEffect,
+  rotationEffect,
+  opacity,
+  hidden,
+  // ... другие модификаторы
+}) => {
+  const modifierStyles: React.CSSProperties = {
+    ...getFrame(frame),
+    ...getPadding(padding),
+    ...getBorder(border),
+    ...getCornerRadius(cornerRadius),
+    ...getShadow(shadow),
+    ...getTransform(scaleEffect, rotationEffect),
+    ...(opacity !== undefined && { opacity }),
+    ...(hidden && { display: 'none' }),
+    ...getAlignment(alignment, 'zstack'),
+    // ... другие стили модификаторов
+  };
+
+  return (
+    <div {...sx(styles.container, className)}>
+      {/* <div {...sx(styles.stack)}> */}
+        {
+          sxChild(children, styles.childrenAll, {style: { ...style, ...modifierStyles }})
+            // .not(i => i === 0, styles.childrenNotFirst)
+            // .render((child) => (
+            //   <div {...sx(styles.stack)}>
+            //     {child}
+            //   </div>
+            // ))
+            .render()
+        }
+      {/* </div> */}
+    </div>
+  );
+};

@@ -15,13 +15,18 @@ export const textColor = stylex.defineVars({
 });
 
 export const spacing = stylex.defineVars({
-  sectionBlock: 'var(--swiftui-section-block-padding)',
+  listTop: 'var(--swiftui-list-top-padding)',
+  listGap: 'var(--swiftui-list-gap)',
+  sectionBottom: 'var(--swiftui-section-bottom-padding)',
   sectionInline: 'var(--swiftui-section-inline-padding)',
-  section: 'var(--swiftui-section-block-padding) var(--swiftui-section-inline-padding)',
+  sectionHeaderBottom: 'var(--swiftui-section-header-bottom-padding)',
+  sectionHeaderInline: 'var(--swiftui-section-header-inline-padding)',
+  sectionFooterTop: 'var(--swiftui-section-footer-top-padding)',
+  sectionFooterInline: 'var(--swiftui-section-footer-inline-padding)',
   cellBlock: 'var(--swiftui-cell-block-padding)',
   cellInline: 'var(--swiftui-cell-inline-padding)',
-  cell: 'var(--swiftui-cell-block-padding) var(--swiftui-cell-inline-padding)',
-  gap: 'var(--swiftui-gap)',
+  gapBlock: 'var(--swiftui-gap-block)',
+  gapInline: 'var(--swiftui-gap-inline)',
   radius: 'var(--swiftui-radius)',
   doubleGap: 'var(--swiftui-double-gap)',
 });
@@ -29,6 +34,11 @@ export const spacing = stylex.defineVars({
 export const fontSize = stylex.defineVars({
   default: 'var(--swiftui-font-size)',
   subtitle: 'var(--swiftui-subtitle-font-size)',
+});
+
+export const fontHeight = stylex.defineVars({
+  default: 'var(--swiftui-font-height)',
+  subtitle: 'var(--swiftui-subtitle-font-height)',
 });
 
 export const safeArea = stylex.defineVars({

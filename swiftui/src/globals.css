@@ -6,43 +6,61 @@
 }
 
 :root {
-  --swiftui-bg-color: #ffffff;
-  --swiftui-secondary-bg-color: #efeff4;
+  --swiftui-bg-color: rgb(255, 255, 255);
+  --swiftui-secondary-bg-color: rgb(242, 242, 247);
 
-  --swiftui-section-bg-color: #ffffff;
+  --swiftui-section-bg-color: rgb(255, 255, 255);
   --swiftui-section-header-text-color: #6d6d72;
-  --swiftui-section-separator-color: #c8c7cc;
+  --swiftui-section-separator-color: rgb(220, 220, 222);
 
-  --swiftui-text-color: #000000;
-  --swiftui-subtitle-text-color: #8e8e93;
+  --swiftui-text-color: rgb(0, 0, 0);
+  --swiftui-subtitle-text-color: rgb(133, 133, 133);
   --swiftui-accent-text-color: #007aff;
+
+  --swiftui-green-color: rgb(52, 199, 89);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --swiftui-bg-color: #ffffff;
-    --swiftui-secondary-bg-color: #efeff4;
+    --swiftui-bg-color: rgb(28, 28, 30);
+    --swiftui-secondary-bg-color: rgb(0, 0, 0);
 
-    --swiftui-section-bg-color: #ffffff;
+    --swiftui-section-bg-color: rgb(28, 28, 30);
     --swiftui-section-header-text-color: #6d6d72;
-    --swiftui-section-separator-color: #c8c7cc;
+    --swiftui-section-separator-color: rgb(49, 49, 51);
 
-    --swiftui-text-color: #000000;
+    --swiftui-text-color: rgb(255, 255, 255);
+    --swiftui-subtitle-text-color: rgb(141, 141, 147);
+    --swiftui-accent-text-color: #007aff;
+
+    --swiftui-green-color: rgb(52, 199, 89);
   }
 }
 
 :root[data-swiftui-ios^="1"]:not([data-swiftui-ios^="19"]):not([data-swiftui-ios^="20"]) {
-  --swiftui-section-block-padding: 15pt;
-  --swiftui-section-inline-padding: 10pt;
-  
-  --swiftui-cell-block-padding: 2pt;
-  --swiftui-cell-inline-padding: 10pt;
+  --swiftui-list-top-padding: 20.5pt;
+  --swiftui-list-gap: 21pt;
 
-  --swiftui-gap: 10pt;
-  --swiftui-radius: 6pt;
+  --swiftui-section-inline-padding: 12pt;
+
+  --swiftui-section-header-bottom-padding: 5pt;
+  --swiftui-section-header-inline-padding: 11pt;
+
+  --swiftui-section-footer-top-padding: 1.5pt;
+  --swiftui-section-footer-inline-padding: 11pt;
+
+  --swiftui-cell-block-padding: 10.5pt;
+  --swiftui-cell-inline-padding: 12pt;
+  --swiftui-cell-min-height: 32.5pt;
+
+  --swiftui-gap-block: 5pt;
+  --swiftui-gap-inline: 7pt;
+  --swiftui-radius: 8pt;
 
   --swiftui-font-size: 12pt;
-  --swiftui-subtitle-font-size: 10pt;
+  --swiftui-font-height: 12pt;
+  --swiftui-subtitle-font-size: 9pt;
+  --swiftui-subtitle-font-height: 9pt;
 }
 
 :root {
@@ -53,6 +71,7 @@ html.swiftui body {
   background: var(--swiftui-secondary-bg-color);
   color: var(--swiftui-text-color);
   font-size: var(--swiftui-font-size);
+  line-height: var(--swiftui-font-height);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
