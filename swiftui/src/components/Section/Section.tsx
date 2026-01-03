@@ -1,6 +1,6 @@
 import React from 'react';
 import { SectionProps } from './types';
-import styles from './styles';
+import styles from './styles.stylex';
 
 import { getFrame } from '../../utils/frame';
 import { getPadding } from '../../utils/padding';
@@ -9,7 +9,7 @@ import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
-import { fontHeightDefaultSubtitle, fontSizeDefaultSubtitle, textColorDefaultSubtitle } from '../../utils/stylex/themes';
+import { fontHeightDefaultSubtitle, fontSizeDefaultSubtitle, textColorDefaultSubtitle, fontLetterSpacingDefaultSubtitle } from '../../utils/stylex/themes';
 import { sxChild } from '../../utils/stylex/children';
 
 export const Section: React.FC<SectionProps> = ({
@@ -44,7 +44,7 @@ export const Section: React.FC<SectionProps> = ({
 
   return (
     <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
-      {header && <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle)}>{header}</div>}
+      {header && <div {...sx(styles.header, styles.textEllipsis, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{header}</div>}
       <div {...sx(styles.content)}>
         {
           sxChild(children)
@@ -65,7 +65,7 @@ export const Section: React.FC<SectionProps> = ({
             ))
         }
       </div>
-      {footer && <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle)}>{footer}</div>}
+      {footer && <div {...sx(styles.footer, styles.textEllipsis, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>}
     </section>
   );
 };

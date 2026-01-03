@@ -5,7 +5,7 @@ const styles = stylex.create({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        gap: spacing.gapBlock,
+        gap: spacing.stackGapBlock,
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         height: '100%',

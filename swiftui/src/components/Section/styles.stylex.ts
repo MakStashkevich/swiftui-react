@@ -1,8 +1,12 @@
 import * as stylex from '@stylexjs/stylex';
-import { color, spacing } from '../../utils/stylex/tokens.stylex';
+import { color, spacing, textColor } from '../../utils/stylex/tokens.stylex';
 
 const minDevicePixelRatio2 = '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx)';
 const minDevicePixelRatio3 = '@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx)';
+
+export const numbers = stylex.defineVars({
+  footer_webkit_line_clamp: stylex.types.number(2),
+});
 
 const styles = stylex.create({
     container: {
@@ -11,10 +15,20 @@ const styles = stylex.create({
     header: {
         paddingBottom: spacing.sectionHeaderBottom,
         paddingInline: spacing.sectionHeaderInline,
+        textTransform: 'uppercase',
+        color: textColor.subtitle,
     },
     footer: {
         paddingTop: spacing.sectionFooterTop,
         paddingInline: spacing.sectionFooterInline,
+        color: textColor.subtitle,
+    },
+    textEllipsis: {
+        textOverflow: 'ellipsis',
+        display: '-webkit-box',
+        '-webkit-line-clamp': numbers.footer_webkit_line_clamp,
+        '-webkit-box-orient': 'vertical',
+        overflow: 'hidden',
     },
     content: {
         borderRadius: spacing.radius,

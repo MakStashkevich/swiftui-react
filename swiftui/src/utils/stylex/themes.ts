@@ -13,3 +13,7 @@ export const fontSizeDefaultSubtitle = stylex.createTheme(fontSize, {
 export const fontHeightDefaultSubtitle = stylex.createTheme(fontHeight, {
     default: 'var(--swiftui-subtitle-font-height)'
 });
+
+export const fontLetterSpacingDefaultSubtitle = stylex.createTheme(fontHeight, {
+    default: 'var(--swiftui-subtitle-font-letter-spacing)'
+});

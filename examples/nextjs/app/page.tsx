@@ -5,22 +5,35 @@ export default function Home() {
     <Form>
       <Section
         header={
-          <Text>HEADER</Text>
+          <Text>First Header</Text>
         }
         footer={
           <Text>Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer Footer</Text>
         }
       >
-        <VStack>
-          <Text>Favorite</Text>
-          <Text>Favorites</Text>
-        </VStack>
         <HStack>
-          <Text>Downloads</Text>
+          <Text>First HStack Text</Text>
+          <Text>Second HStack Text</Text>
         </HStack>
+        
+        <VStack>
+          <Text>First VStack Text</Text>
+          <Text>Second VStack Text</Text>
+        </VStack>
+        
+        <ZStack>
+          <Text>First ZStack Text</Text>
+          <Text>Second ZStack Text</Text>
+        </ZStack>
+
+        <HStack>
+          <Text>Single HStack Text</Text>
+        </HStack>
+
+        <Text>Single Text</Text>
       </Section>
       <Section
-        header={<Text>PREFERENCES</Text>}
+        header={<Text>Second Header</Text>}
       >
         <Text>Test 1</Text>
       </Section>

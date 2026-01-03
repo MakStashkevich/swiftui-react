@@ -25,8 +25,8 @@ export const spacing = stylex.defineVars({
   sectionFooterInline: 'var(--swiftui-section-footer-inline-padding)',
   cellBlock: 'var(--swiftui-cell-block-padding)',
   cellInline: 'var(--swiftui-cell-inline-padding)',
-  gapBlock: 'var(--swiftui-gap-block)',
-  gapInline: 'var(--swiftui-gap-inline)',
+  stackGapBlock: 'var(--swiftui-stack-gap-block)',
+  stackGapInline: 'var(--swiftui-stack-gap-inline)',
   radius: 'var(--swiftui-radius)',
   doubleGap: 'var(--swiftui-double-gap)',
 });
@@ -39,6 +39,11 @@ export const fontSize = stylex.defineVars({
 export const fontHeight = stylex.defineVars({
   default: 'var(--swiftui-font-height)',
   subtitle: 'var(--swiftui-subtitle-font-height)',
+});
+
+export const fontLetterSpacing = stylex.defineVars({
+  default: 'var(--swiftui-font-letter-spacing)',
+  subtitle: 'var(--swiftui-subtitle-font-letter-spacing)',
 });
 
 export const safeArea = stylex.defineVars({

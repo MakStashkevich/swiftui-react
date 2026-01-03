@@ -5,7 +5,7 @@ const styles = stylex.create({
     container: {
         display: 'flex',
         flexDirection: 'row',
-        gap: spacing.gapInline,
+        gap: spacing.stackGapInline,
     },
 });
 

@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import { SourceMapGenerator } from 'source-map';
 import typescript from 'rollup-plugin-typescript2';
 import * as csso from 'csso';
+import copy from 'rollup-plugin-copy';
 
 const clientDirectivePlugin = () => {
   return {
@@ -217,6 +218,14 @@ export default {
       format: '.css',
       minify: isProduction, // А вот здесь уже минимизируем конечный файл
       debugFileComments: !isProduction,
+    }),
+    copy({
+      targets: [
+        {
+          src: 'src/fonts/SFPro/*',
+          dest: 'dist/fonts/SFPro',
+        },
+      ],
     }),
   ],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
