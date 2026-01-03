@@ -2,15 +2,12 @@ import * as stylex from '@stylexjs/stylex';
 
 const styles = stylex.create({
     container: {
-        position: 'relative',
-        display: 'block',
-        height: '100%',
+        display: 'grid',
+        alignItems: 'center',
+        justifyItems: 'center',
     },
     childrenAll: {
-        position: 'absolute',
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
+        gridArea: '1/1/1/1',
     },
 });
 

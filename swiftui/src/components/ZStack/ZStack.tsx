@@ -44,18 +44,10 @@ export const ZStack: React.FC<ZStackProps> = ({
 
   return (
     <div {...sx(styles.container, className)}>
-      {/* <div {...sx(styles.stack)}> */}
-        {
-          sxChild(children, styles.childrenAll, {style: { ...style, ...modifierStyles }})
-            // .not(i => i === 0, styles.childrenNotFirst)
-            // .render((child) => (
-            //   <div {...sx(styles.stack)}>
-            //     {child}
-            //   </div>
-            // ))
-            .render()
-        }
-      {/* </div> */}
+      {
+        sxChild(children, styles.childrenAll, {style: { ...style, ...modifierStyles }})
+          .render()
+      }
     </div>
   );
 };
