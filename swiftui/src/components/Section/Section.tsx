@@ -44,7 +44,7 @@ export const Section: React.FC<SectionProps> = ({
 
   return (
     <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
-      {header && <div {...sx(styles.header, styles.textEllipsis, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{header}</div>}
+      {header && <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{header}</div>}
       <div {...sx(styles.content)}>
         {
           sxChild(children)
@@ -65,7 +65,7 @@ export const Section: React.FC<SectionProps> = ({
             ))
         }
       </div>
-      {footer && <div {...sx(styles.footer, styles.textEllipsis, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>}
+      {footer && <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>}
     </section>
   );
 };

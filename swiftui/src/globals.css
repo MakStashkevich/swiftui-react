@@ -39,12 +39,12 @@
 
 :root[data-swiftui-ios^="1"]:not([data-swiftui-ios^="19"]):not([data-swiftui-ios^="20"]) {
   --swiftui-list-top-padding: 11.5pt;
-  --swiftui-list-gap: 13pt;
+  --swiftui-list-gap: 20pt;
 
   --swiftui-section-inline-padding: 12pt;
 
   --swiftui-section-header-bottom-padding: 5pt;
-  --swiftui-section-header-inline-padding: 11pt;
+  --swiftui-section-header-inline-padding: 12pt;
 
   --swiftui-section-footer-top-padding: 2pt;
   --swiftui-section-footer-inline-padding: 12pt;
