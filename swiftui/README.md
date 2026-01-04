@@ -35,12 +35,13 @@ yarn add @makstashkevich/swiftui-react
    - [x] HStack
    - [x] VStack
    - [x] ZStack
-
+- [x] Image
+   - [x] Image
+   - [x] Image on List
+   
 ### In Process
 
-- [ ] Image
-   - [x] Image
-   - [ ] Image on List
+- [ ] Toggle
 
 ### Todo
 - [ ] Button
@@ -60,7 +61,6 @@ yarn add @makstashkevich/swiftui-react
 - [ ] Spacer
 - [ ] Stepper
 - [ ] TextField
-- [ ] Toggle
 
 ## Development
 
