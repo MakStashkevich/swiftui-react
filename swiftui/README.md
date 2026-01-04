@@ -16,21 +16,51 @@ yarn add @makstashkevich/swiftui-react
 
 ## TODO
 
+### Completed
+
 - [x] CSS Style Generator
 - [x] iOS Style's
    - [x] iOS Colors
    - [x] iOS Sizes
    - [x] iOS Fonts (SF Pro Display)
-   - [ ] iOS Icons (SF Symbols)
-- [x] View's
+   - [x] iOS Icons (SF Symbols) [@bradleyhodges/sfsymbols](https://github.com/bradleyhodges/sfsymbols)
+- [x] Provider
    - [x] View
+- [x] Window
    - [x] List
    - [x] Form
    - [x] Section
+- [x] Text
 - [x] Stack's
    - [x] HStack
    - [x] VStack
    - [x] ZStack
+
+### In Process
+
+- [ ] Image
+   - [x] Image
+   - [ ] Image on List
+
+### Todo
+- [ ] Button
+- [ ] Color
+- [ ] ColorPicker
+- [ ] DatePicker
+- [ ] Picker
+- [ ] Divider
+- [ ] GeometryReader
+- [ ] Group
+- [ ] Label
+- [ ] Menu
+- [ ] ProgressView
+- [ ] Shape
+- [ ] SheetContent
+- [ ] Slider
+- [ ] Spacer
+- [ ] Stepper
+- [ ] TextField
+- [ ] Toggle
 
 ## Development
 

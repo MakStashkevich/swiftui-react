@@ -55,6 +55,9 @@ export default function Home() {
           <Image />
           <Text>Text With Unknown Icon</Text>
         </HStack>
+
+        <Image systemName={sfHeartFill} />
+        <Text>Text without Image</Text>
       </Section>
     </Form>
   );

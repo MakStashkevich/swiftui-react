@@ -1,6 +1,23 @@
 :root {
+  --tabbar-height: 88px;
+  --tabbar-current-height: var(--tabbar-height);
+  --tabbar-z-index: 1000;
+  --has-tabbar: 1;
+  --dpr: 2; /* todo: add from view script: const dpr = window.devicePixelRatio; */
+
+  --swiftui-safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --swiftui-safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  --swiftui-safe-area-inset-left: env(safe-area-inset-left, 0px);
+  --swiftui-safe-area-inset-right: env(safe-area-inset-right, 0px);
+
+  /* actual viewport height can be changed */
+  --swiftui-viewport-height: 100vh;
   --min-viewport-height: min(100vh, var(--swiftui-viewport-height));
+
+  /* calc(max-vh - min-vh + safe-area-inset-bottom) */
   --viewport-safe-area-inset-bottom: calc(100vh - var(--min-viewport-height, 100vh) + var(--swiftui-safe-area-inset-bottom, 0px));
+  
+  /* vp-bottom + tabbar-height */
   --content-safe-area-inset-bottom: calc(var(--viewport-safe-area-inset-bottom, 0px) + var(--tabbar-current-height, 0px));
   --content-safe-area: calc(100vh - var(--content-safe-area-inset-bottom, 0px));
 }
@@ -53,6 +70,9 @@
   --swiftui-cell-inline-padding: 12pt;
   --swiftui-cell-min-height: 32.5pt;
 
+  --swiftui-cell-image-left-padding: 13.5pt;
+  --swiftui-cell-image-right-padding: 7pt;
+
   --swiftui-stack-gap-block: 2pt;
   --swiftui-stack-gap-inline: 6pt;
 
@@ -70,9 +90,14 @@
   --swiftui-double-gap: calc(var(--swiftui-gap) * 2);
 }
 
+html.swiftui {
+  height: 100%;
+}
+
 html.swiftui body {
   background: var(--swiftui-secondary-bg-color);
   color: var(--swiftui-text-color);
+  min-height: 100%;
   font-size: var(--swiftui-font-size);
   line-height: var(--swiftui-font-height);
   letter-spacing: var(--swiftui-font-letter-spacing);
@@ -121,6 +146,12 @@ html.swiftui.tabbarScrollLayout #root::-webkit-scrollbar {
   display: none;
 }
 
+html.swiftui.tabbarScrollLayout.isScrolled {
+  -webkit-locale: "en";
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 html.swiftui.tabbarScrollLayout.isScrolled body:after {
   background: var(--separator-non-opaque-color);
   content: "";
@@ -128,24 +159,10 @@ html.swiftui.tabbarScrollLayout.isScrolled body:after {
   inset-inline-start: 0;
   position: absolute;
   top: 0;
+  transform: scaleY(calc(1 / var(--dpr, 1)));
   transform-origin: bottom left;
   transform-origin: top left;
   width: 100%;
-  will-change: transform;
-}
-
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 2dppx) {
-  html.swiftui.tabbarScrollLayout.isScrolled body:after {
-    transform: scaleY(.5)
-  }
-}
-
-@media (-webkit-min-device-pixel-ratio: 3),
-(min-resolution: 3dppx) {
-  html.swiftui.tabbarScrollLayout.isScrolled body:after {
-    transform: scaleY(.33)
-  }
 }
 
 html.swiftui.noScroll,
@@ -157,12 +174,73 @@ html.swiftui.noScroll body {
   touch-action: none;
 }
 
+html.swiftui #appView {
+  flex: 1 0 var(--content-safe-area, 0px);
+  width: 100%;
+}
+
+html.swiftui #appView .content {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  min-height: 100%;
+  opacity: 0;
+  overflow: hidden;
+  overflow: clip;
+  position: relative;
+  transform: scale(1.02);
+  transform-origin: 50% var(--swiftui-viewport-height);
+  will-change: transform;
+}
+
+html.swiftui #appView .content.show {
+  opacity: 1;
+  overflow: initial;
+  transform: none;
+  will-change: auto;
+}
+
+html.swiftui #appView .content .container {
+  align-items: stretch;
+  background-color: var(--tg-theme-secondary-bg-color);
+  display: flex;
+  flex-direction: column;
+  min-height: var(--content-safe-area, 100vh);
+}
+
+html.swiftui .tabBarSpacing {
+  box-sizing: initial;
+  flex: 0 0 var(--tabbar-current-height,0px);
+  padding-bottom: calc(var(--viewport-safe-area-inset-bottom, 0) * (1 - var(--has-tabbar, 0)));
+  width: 100%;
+}
+
+html.swiftui.noScroll .tabBarSpacing {
+  padding-bottom: calc(var(--viewport-safe-area-inset-bottom, 0) * (1 - var(--has-tabbar, 0)));
+}
+
 html.swiftui * {
-  -webkit-touch-callout: none;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-user-select: none;
   user-select: none;
+}
+
+html.swiftui * {
+  -webkit-touch-callout: none;
+}
+
+html.swiftui button {
+  background: #0000;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+  outline: none;
+  padding: 0;
+}
+
+html.swiftui button:disabled {
+    cursor: not-allowed;
 }
 
 html.swiftui a {
@@ -194,8 +272,33 @@ html.swiftui p {
   padding: 0;
 }
 
-.scrollbar-hidden {
+html.swiftui.scrollbar-hidden {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.tabBar {
+  bottom: 0;
+  inset-inline: 0;
+  position: fixed;
+  will-change: transform;
+  z-index: var(--tabbar-z-index);
+}
+
+.tabBar .content {
+  box-sizing: initial;
+  padding-bottom: calc(var(--tg-safe-area-inset-bottom, var(--viewport-safe-area-inset-bottom)) + var(--testnet-warning-height, 0px));
+  transition: background-color .2s ease;
+}
+
+.tabBar .content .padding {
+  height: var(--tabbar-height);
+  padding-bottom: var(--tabbar-bottom-offset-with-testnet, 0);
+}
+
+.tabBat .content .container {
+  height: 100%;
+  position: relative;
+  will-change: auto;
 }

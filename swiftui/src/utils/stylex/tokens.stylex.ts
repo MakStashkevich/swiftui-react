@@ -25,6 +25,8 @@ export const spacing = stylex.defineVars({
   sectionFooterInline: 'var(--swiftui-section-footer-inline-padding)',
   cellBlock: 'var(--swiftui-cell-block-padding)',
   cellInline: 'var(--swiftui-cell-inline-padding)',
+  cellImageLeft: 'var(--swiftui-cell-image-left-padding)',
+  cellImageRight: 'var(--swiftui-cell-image-right-padding)',
   stackGapBlock: 'var(--swiftui-stack-gap-block)',
   stackGapInline: 'var(--swiftui-stack-gap-inline)',
   radius: 'var(--swiftui-radius)',

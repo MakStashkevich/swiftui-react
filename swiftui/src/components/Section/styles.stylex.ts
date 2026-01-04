@@ -21,7 +21,7 @@ const styles = stylex.create({
         paddingTop: spacing.sectionFooterTop,
         paddingInline: spacing.sectionFooterInline,
     },
-    // todo: remove textEllipsis???
+    // todo: when use textEllipsis???
     textEllipsis: {
         textOverflow: 'ellipsis',
         display: '-webkit-box',
@@ -61,6 +61,16 @@ const styles = stylex.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    cellImage: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        marginLeft: spacing.cellImageLeft,
+        marginRight: spacing.cellImageRight,
+        maxWidth: '100%',
+        minWidth: 0,
+        height: 40,
     },
     separator: {
         alignItems: 'center',
@@ -103,6 +113,9 @@ const styles = stylex.create({
                 [minDevicePixelRatio3]: 'scaleY(.33)',
             },
         }
+    },
+    separatorAfterIcon: {
+        marginLeft: 0,
     },
     block: {
         minHeight: 'var(--swiftui-cell-min-height)',

@@ -65,7 +65,7 @@ export const Image: React.FC<ImageProps> = ({
   if (typeof systemName === 'object' && 'iconName' in systemName && 'sourceName' in systemName && 'viewBox' in systemName && SFIcon) {
     return (
       <div {...sx(styles.container)} style={{ ...style, ...modifierStyles }}>
-        <SFIcon icon={systemName} size={16.5} />
+        <SFIcon icon={systemName} size={17} />
       </div>
     );
   }

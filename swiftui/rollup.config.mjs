@@ -117,10 +117,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const entryPoints = [
-    ...globSync(`${path.resolve(__dirname, 'src/components')}/!(**/__uncompleted)/**/*.{ts,tsx}`),
-    ...globSync(`${path.resolve(__dirname, 'src/utils')}/**/*.{ts,tsx}`),
-    ...globSync(`${path.resolve(__dirname, 'src/hooks')}/**/*.{ts,tsx}`),
-    path.resolve(__dirname, 'src/index.ts'), // Добавляем index.ts как точку входа
+  path.resolve(__dirname, 'src/index.ts'), // Добавляем index.ts как точку входа
 ];
 
 // Создаем директорию dist, если ее нет
@@ -165,17 +162,6 @@ export default {
     },
   ],
   plugins: [
-    stylexPlugin({
-      fileName: 'stylex.css',
-      use: ['react'],
-      useCSSLayers: true,
-      classNamePrefix: 'swiftui-',
-      dev: !isProduction,
-      unstable_moduleResolution: {
-        type: 'commonJS',
-        rootDir: __dirname,
-      },
-    }),
     typescript({
       tsconfig: "tsconfig.json",
       clean: true,
@@ -201,6 +187,17 @@ export default {
         },
       },
       sourceMaps: true,
+    }),
+    stylexPlugin({
+      fileName: 'stylex.css',
+      use: ['react'],
+      useCSSLayers: true,
+      classNamePrefix: 'swiftui-',
+      dev: !isProduction,
+      unstable_moduleResolution: {
+        type: 'commonJS',
+        rootDir: __dirname,
+      },
     }),
     postcss({
       extract: 'index.css',

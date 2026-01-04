@@ -32,6 +32,8 @@ export const script = (
         })
 
         el.classList.add('swiftui')
+        el.classList.add('tabbarScrollLayout')
+        el.classList.add('isScrolled')
         setColorScheme(theme)
     }
 
@@ -55,7 +57,7 @@ export const script = (
         }
 
         return version;
-    };
+    }
 
     function updateVersion(version: string) {
         el.setAttribute(attributeVersion, version);

@@ -49,20 +49,52 @@ export const Section: React.FC<SectionProps> = ({
         {
           sxChild(children)
             // .last(styles.contentChildrenLast)
-            .render((child, i, len) => (
-              <div {...sx(styles.row, (i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast))}> {/* block relative */}
-                <div {...sx(styles.rowLine)}> {/* flex flex-row items-center */}
-                  {/* Icon */}
-                  {/* Text & shevron */}
-                  <div {...sx(styles.separator)}> {/* separator */}
-                    <div {...sx(styles.block)}>{/* min-w-0 max-w-full flex flex-col flex-1 items-start justify-center min-h-11 py-2.5 */}
-                      {/* body */}
-                      {child}
+            .render((child, i, len) => {
+              let icon: React.ReactNode = null;
+              let content: React.ReactNode = child;
+
+              if (React.isValidElement(child)) {
+                const childType = child.type as any;
+                if (childType.name === 'HStack' || childType.displayName === 'HStack') {
+                  const childrenArray = React.Children.toArray((child as React.ReactElement<any>).props.children);
+                  if (childrenArray.length > 0) {
+                    const firstChild = childrenArray[0];
+                    if (React.isValidElement(firstChild) && typeof firstChild.type !== 'string') {
+                      const type = firstChild.type as any;
+                      if (type.name === 'Image' || type.displayName === 'Image') {
+                        icon = firstChild;
+                        const restChildren = childrenArray.slice(1);
+                        content = React.cloneElement(
+                          child,
+                          { ...(child as React.ReactElement<any>).props },
+                          ...restChildren
+                        );
+                      }
+                    }
+                  }
+                }
+              }
+
+              return (
+                <div {...sx(styles.row, (i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast))}>
+                  <div {...sx(styles.rowLine)}>
+                    {/* Icon */}
+                    {icon && (
+                      <div {...sx(styles.cellImage)}>
+                        {icon}
+                      </div>
+                    )}
+                    {/* Text & shevron */}
+                    <div {...sx(styles.separator, (icon ? styles.separatorAfterIcon : null))}>
+                      <div {...sx(styles.block)}>
+                        {/* body */}
+                        {content}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
         }
       </div>
       {footer && <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>}

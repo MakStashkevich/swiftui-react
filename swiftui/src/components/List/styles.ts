@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import { safeArea, spacing } from '../../utils/stylex/tokens.stylex';
+import { spacing } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
   container: {
@@ -7,7 +7,7 @@ const styles = stylex.create({
     padding: 0,
     margin: 0,
     width: '100%',
-    height: safeArea.content,
+    height: '100%',
     paddingTop: spacing.listTop,
     display: 'flex',
     flexDirection: 'column',
