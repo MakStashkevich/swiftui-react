@@ -12,9 +12,13 @@ export * from './components/Section';
 // Text
 export * from './components/Text';
 
+// Stack's
 export * from './components/HStack';
 export * from './components/VStack';
 export * from './components/ZStack';
+
+// Image
+export * from './components/Image';
 
 // export * from './components/Button';
 // export * from './components/Color';
@@ -24,7 +28,6 @@ export * from './components/ZStack';
 // export * from './components/Divider';
 // export * from './components/GeometryReader';
 // export * from './components/Group';
-// export * from './components/Image';
 // export * from './components/Label';
 // export * from './components/Menu';
 // export * from './components/ProgressView';
@@ -36,6 +39,7 @@ export * from './components/ZStack';
 // export * from './components/TextField';
 // export * from './components/Toggle';
 
+// Utils
 export * from './utils/onBaseEvent';
 export * from './utils/alert';
 export * from './utils/alignments';
@@ -49,4 +53,5 @@ export * from './utils/padding';
 export * from './utils/shadow';
 export * from './utils/transform';
 
+// Hooks
 export * from './hooks/useBinding';

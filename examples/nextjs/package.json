@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@bradleyhodges/sfsymbols": "^7.0.4",
+    "@bradleyhodges/sfsymbols-react": "^7.0.4",
+    "@bradleyhodges/sfsymbols-types": "^7.0.4",
     "@makstashkevich/swiftui-react": "workspace:*",
     "next": "16.0.3",
     "react": "19.2.0",

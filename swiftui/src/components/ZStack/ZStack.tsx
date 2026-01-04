@@ -45,7 +45,7 @@ export const ZStack: React.FC<ZStackProps> = ({
   return (
     <div {...sx(styles.container, className)}>
       {
-        sxChild(children, styles.childrenAll, {style: { ...style, ...modifierStyles }})
+        sxChild(children, {style: { ...style, ...modifierStyles, ...{gridArea: '1/1/1/1'} }})
           .render()
       }
     </div>

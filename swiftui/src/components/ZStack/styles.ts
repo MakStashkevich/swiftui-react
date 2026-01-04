@@ -6,9 +6,9 @@ const styles = stylex.create({
         alignItems: 'center',
         justifyItems: 'center',
     },
-    childrenAll: {
-        gridArea: '1/1/1/1',
-    },
+    // childrenAll: {
+    //     gridArea: '1/1/1/1',
+    // },
 });
 
 export default styles;

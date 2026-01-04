@@ -1,4 +1,5 @@
-import { Form, Text, Section, HStack, VStack, ZStack } from "@makstashkevich/swiftui-react";
+import { sfHeartFill } from '@bradleyhodges/sfsymbols';
+import { Form, Text, Section, HStack, VStack, ZStack, Image } from "@makstashkevich/swiftui-react";
 
 export default function Home() {
   return (
@@ -35,7 +36,25 @@ export default function Home() {
       <Section
         header={<Text>Second Header</Text>}
       >
-        <Text>Test 1</Text>
+        <HStack>
+          <Image systemName={sfHeartFill} />
+          <Text>HStack Text with Image</Text>
+        </HStack>
+
+        <VStack>
+          <Image systemName={sfHeartFill} />
+          <Text>VStack Text with Image</Text>
+        </VStack>
+
+        <ZStack>
+          <Image systemName={sfHeartFill} />
+          <Text>ZStack Text with Image</Text>
+        </ZStack>
+
+        <HStack>
+          <Image />
+          <Text>Text With Unknown Icon</Text>
+        </HStack>
       </Section>
     </Form>
   );

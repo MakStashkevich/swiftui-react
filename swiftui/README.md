@@ -14,6 +14,24 @@ yarn add @makstashkevich/swiftui-react
 
 (Coming soon)
 
+## TODO
+
+- [x] CSS Style Generator
+- [x] iOS Style's
+   - [x] iOS Colors
+   - [x] iOS Sizes
+   - [x] iOS Fonts (SF Pro Display)
+   - [ ] iOS Icons (SF Symbols)
+- [x] View's
+   - [x] View
+   - [x] List
+   - [x] Form
+   - [x] Section
+- [x] Stack's
+   - [x] HStack
+   - [x] VStack
+   - [x] ZStack
+
 ## Development
 
 To set up the development environment:
@@ -25,11 +43,11 @@ To set up the development environment:
    ```
 2. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 3. Build the project:
    ```bash
-   npm run build
+   pnpm run build
    ```
 
 ## License

@@ -32,6 +32,8 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@bradleyhodges/sfsymbols-react": "*",
+    "@bradleyhodges/sfsymbols-types": "*",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@stylexjs/babel-plugin": "^0.17.0",
