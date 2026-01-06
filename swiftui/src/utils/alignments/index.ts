@@ -15,71 +15,72 @@ export type ZStackAlignment =
   | 'bottomTrailing';
 
 export const AlignmentMap = {
+  // https://developer.apple.com/documentation/swiftui/horizontalalignment
   vstack: {
     leading: {
-      alignItems: 'flex-start',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
     },
     center: {
-      alignItems: 'center',
       justifyContent: 'center',
     },
     trailing: {
-      alignItems: 'flex-end',
-      justifyContent: 'center',
+      justifyContent: 'flex-end',
     },
   },
+  // https://developer.apple.com/documentation/swiftui/verticalalignment
   hstack: {
     top: {
       alignItems: 'flex-start',
-      justifyContent: 'center',
     },
     center: {
       alignItems: 'center',
-      justifyContent: 'center',
     },
     bottom: {
       alignItems: 'flex-end',
-      justifyContent: 'center',
     },
+    // todo: firstTextBaseline, lastTextBaseline
   },
+  // https://developer.apple.com/documentation/swiftui/alignment
   zstack: {
-    center: {
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    leading: {
-      justifyContent: 'center',
+    topLeading: {
       alignItems: 'flex-start',
-    },
-    trailing: {
-      justifyContent: 'center',
-      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
     },
     top: {
-      justifyContent: 'flex-start',
-      alignItems: 'center',
-    },
-    bottom: {
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-    },
-    topLeading: {
-      justifyContent: 'flex-start',
       alignItems: 'flex-start',
+      justifyContent: 'center',
     },
     topTrailing: {
-      justifyContent: 'flex-start',
-      alignItems: 'flex-end',
-    },
-    bottomLeading: {
-      justifyContent: 'flex-end',
       alignItems: 'flex-start',
+      justifyContent: 'flex-end',
+    },
+
+    leading: {
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+    },
+    center: {
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    trailing: {
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+    },
+    
+    bottomLeading: {
+      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
+    },
+    bottom: {
+      alignItems: 'flex-end',
+      justifyContent: 'center',
     },
     bottomTrailing: {
-      justifyContent: 'flex-end',
       alignItems: 'flex-end',
+      justifyContent: 'flex-end',
     },
+    // todo: leadingLastTextBaseline, trailingFirstTextBaseline
   },
 };
 
