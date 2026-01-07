@@ -11,7 +11,6 @@ import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
 import { fontHeightDefaultSubtitle, fontSizeDefaultSubtitle, textColorDefaultSubtitle, fontLetterSpacingDefaultSubtitle } from '../../utils/stylex/themes';
 import { sxChild } from '../../utils/stylex/children';
-import { spacing } from '../../utils/stylex/tokens.stylex';
 
 export const Section: React.FC<SectionProps> = ({
   children,
@@ -49,7 +48,6 @@ export const Section: React.FC<SectionProps> = ({
       <div {...sx(styles.content)}>
         {
           sxChild(children)
-            // .last(styles.contentChildrenLast)
             .render((child, i, len) => {
               let icon: React.ReactNode = null;
               let content: React.ReactNode = child;
@@ -77,7 +75,6 @@ export const Section: React.FC<SectionProps> = ({
               }
 
               const rowStyle = i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast;
-
               return (
                 <div {...sx(styles.row, rowStyle as any)}>
                   <div {...sx(styles.rowLine)}>
