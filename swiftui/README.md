@@ -42,6 +42,7 @@ yarn add @makstashkevich/swiftui-react
 ### In Process
 
 - [ ] Toggle
+- [ ] Click animations
 
 ### Todo
 - [ ] Button

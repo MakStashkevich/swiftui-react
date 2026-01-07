@@ -119,8 +119,10 @@ const styles = stylex.create({
     },
     block: {
         minHeight: 'var(--swiftui-cell-min-height)',
-        paddingBlock: spacing.cellBlock,
-        display: 'block',
+        display: 'flex',
+        width: '100%',
+        alignItems: 'center',
+        marginInlineEnd: spacing.cellInline,
     }
 });
 

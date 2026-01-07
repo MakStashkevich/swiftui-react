@@ -85,7 +85,7 @@ export function sxChild(children: React.ReactNode, ...baseStyles: SXArgs) {
 
         const styledChild = React.cloneElement(child, {
           ...childProps,
-          ...sx(...baseStyles, ...matchedStyles, childProps),
+          ...sx(childProps, ...baseStyles, ...matchedStyles),
         });
 
         if (wrapper) {

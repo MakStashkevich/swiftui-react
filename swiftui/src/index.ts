@@ -20,6 +20,9 @@ export * from './components/ZStack';
 // Image
 export * from './components/Image';
 
+// Toggle
+export * from './components/Toggle';
+
 // export * from './components/Button';
 // export * from './components/Color';
 // export * from './components/ColorPicker';
@@ -37,7 +40,6 @@ export * from './components/Image';
 // export * from './components/Spacer';
 // export * from './components/Stepper';
 // export * from './components/TextField';
-// export * from './components/Toggle';
 
 // Utils
 export * from './utils/onBaseEvent';

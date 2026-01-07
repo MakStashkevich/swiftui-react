@@ -5,10 +5,9 @@ const styles = stylex.create({
         display: 'grid',
         alignItems: 'center',
         justifyItems: 'center',
+        gridTemplateColumns: '1fr',
+        width: '100%',
     },
-    // childrenAll: {
-    //     gridArea: '1/1/1/1',
-    // },
 });
 
 export default styles;

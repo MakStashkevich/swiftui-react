@@ -19,12 +19,15 @@ export const AlignmentMap = {
   vstack: {
     leading: {
       justifyContent: 'flex-start',
+      alignItems: 'center',
     },
     center: {
       justifyContent: 'center',
+      alignItems: 'center',
     },
     trailing: {
       justifyContent: 'flex-end',
+      alignItems: 'center',
     },
   },
   // https://developer.apple.com/documentation/swiftui/verticalalignment

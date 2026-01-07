@@ -6,6 +6,7 @@ const styles = stylex.create({
         display: 'flex',
         flexDirection: 'row',
         gap: spacing.stackGapInline,
+        width: '100%',
     },
 });
 

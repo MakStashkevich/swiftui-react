@@ -1,6 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import swc from 'rollup-plugin-swc3';
+import { SourceMapGenerator } from 'source-map';
 import stylexPlugin from '@stylexjs/rollup-plugin';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
@@ -8,8 +8,7 @@ import { globSync } from 'glob';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { SourceMapGenerator } from 'source-map';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import * as csso from 'csso';
 import copy from 'rollup-plugin-copy';
 
@@ -131,12 +130,9 @@ export default {
   input: entryPoints,
   output: [
     {
-      dir: 'dist',
+      file: 'dist/index.js',
       format: 'esm',
       sourcemap: true,
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      entryFileNames: '[name].js',
       exports: 'named',
       interop: 'auto',
       globals: {
@@ -146,12 +142,9 @@ export default {
       },
     },
     {
-      dir: 'dist',
+      file: 'dist/index.cjs',
       format: 'cjs',
       sourcemap: true,
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      entryFileNames: '[name].cjs',
       exports: 'named',
       interop: 'auto',
       globals: {
@@ -162,31 +155,13 @@ export default {
     },
   ],
   plugins: [
-    typescript({
-      tsconfig: "tsconfig.json",
-      clean: true,
-      tsconfigOverride: {
-        compilerOptions: {
-          noUnusedLocals: false,
-        },
-      },
-    }),
     clientDirectivePlugin(),
-    resolve(),
+    resolve({
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    }),
     commonjs(),
-    swc({
-      jsc: {
-        parser: {
-          syntax: 'typescript',
-          tsx: true,
-        },
-        transform: {
-          react: {
-            runtime: 'automatic',
-          },
-        },
-      },
-      sourceMaps: true,
+    typescript({
+      tsconfig: "./tsconfig.json",
     }),
     stylexPlugin({
       fileName: 'stylex.css',
@@ -198,6 +173,8 @@ export default {
         type: 'commonJS',
         rootDir: __dirname,
       },
+      // Exclude node_modules from processing, as it can cause issues
+      exclude: ['node_modules/**'],
     }),
     postcss({
       extract: 'index.css',
@@ -232,7 +209,7 @@ export default {
   ],
   external: ['react', 'react-dom', 'react/jsx-runtime'],
   watch: {
-    include: 'src/**',
+    include: 'src/**/*',
     exclude: 'node_modules/**',
   },
 };

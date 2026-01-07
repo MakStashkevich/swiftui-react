@@ -237,7 +237,7 @@ export interface Modifiers {
   buttonStyle?: 'bordered' | 'borderless' | 'plain' | 'borderedProminent';
   pickerStyle?: 'wheel' | 'segmented' | 'menu';
   textFieldStyle?: 'plain' | 'roundedBorder';
-  listStyle?: 'inset' | 'grouped' | 'plain' | 'insetGrouped';
+  listStyle?: 'automatic' | 'inset' | 'grouped' | 'plain' | 'insetGrouped';
 
   // Haptics
   sensoryFeedback?: {

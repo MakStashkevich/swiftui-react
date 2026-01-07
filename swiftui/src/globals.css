@@ -35,6 +35,7 @@
   --swiftui-accent-text-color: #007aff;
 
   --swiftui-green-color: rgb(52, 199, 89);
+  --swiftui-gray-color: rgb(233, 233, 235);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,6 +52,7 @@
     --swiftui-accent-text-color: #007aff;
 
     --swiftui-green-color: rgb(52, 199, 89);
+    --swiftui-gray-color: rgb(57, 57, 61);
   }
 }
 
@@ -60,15 +62,17 @@
 
   --swiftui-section-inline-padding: 12pt;
 
-  --swiftui-section-header-bottom-padding: 5pt;
+  --swiftui-section-header-bottom-padding: 4pt;
   --swiftui-section-header-inline-padding: 12pt;
 
-  --swiftui-section-footer-top-padding: 2pt;
+  --swiftui-section-footer-top-padding: 3.5pt;
   --swiftui-section-footer-inline-padding: 12pt;
 
-  --swiftui-cell-block-padding: 10.1pt;
+  --swiftui-cell-text-block-padding: 9.5pt;
+
+  --swiftui-cell-block-padding: 2.5pt;
   --swiftui-cell-inline-padding: 12pt;
-  --swiftui-cell-min-height: 32.5pt;
+  --swiftui-cell-min-height: 32.7pt;
 
   --swiftui-cell-image-left-padding: 13.5pt;
   --swiftui-cell-image-right-padding: 7pt;
@@ -79,10 +83,10 @@
   --swiftui-radius: 8pt;
 
   --swiftui-font-size: 13pt;
-  --swiftui-font-height: 13pt;
+  --swiftui-font-height: 14.2pt;
   --swiftui-font-letter-spacing: 0.03em;
   --swiftui-subtitle-font-size: 10pt;
-  --swiftui-subtitle-font-height: 10pt;
+  --swiftui-subtitle-font-height: 9pt;
   --swiftui-subtitle-font-letter-spacing: 0.04em;
 }
 

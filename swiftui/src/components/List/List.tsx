@@ -9,6 +9,31 @@ import { getCornerRadius } from '../../utils/cornerRadius';
 import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
+import { Section } from '../Section';
+
+const wrapChildrenInSections = (children: React.ReactNode) => {
+  const childrenArray = React.Children.toArray(children);
+  const newChildren: React.ReactNode[] = [];
+  let currentGroup: React.ReactNode[] = [];
+
+  childrenArray.forEach((child) => {
+    if (React.isValidElement(child) && (child.type as any).name === 'Section') {
+      if (currentGroup.length > 0) {
+        newChildren.push(<Section>{currentGroup}</Section>);
+        currentGroup = [];
+      }
+      newChildren.push(child);
+    } else {
+      currentGroup.push(child);
+    }
+  });
+
+  if (currentGroup.length > 0) {
+    newChildren.push(<Section>{currentGroup}</Section>);
+  }
+
+  return newChildren;
+};
 
 export const List: React.FC<ListProps> = ({
   children,
@@ -23,6 +48,7 @@ export const List: React.FC<ListProps> = ({
   rotationEffect,
   opacity,
   hidden,
+  listStyle = 'automatic',
   // ... другие модификаторы
 }) => {
   const modifierStyles: React.CSSProperties = {
@@ -37,9 +63,14 @@ export const List: React.FC<ListProps> = ({
     // ... другие стили модификаторов
   };
 
+  if (listStyle === 'automatic') {
+    listStyle = 'insetGrouped'; // default for iOS 15+
+  }
+  // todo: add listStyles - inset, plain, grouped, sidebar
+
   return (
     <div {...sx(styles.container)} style={{ ...style, ...modifierStyles }}>
-      {children}
+      {wrapChildrenInSections(children)}
     </div>
   );
 };

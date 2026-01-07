@@ -12,6 +12,7 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: spacing.listGap,
+    '--on-list': 1,
   },
 });
 

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Attribute, ViewProviderProps, ViewScriptProps, UseViewProps } from './types';
 import { script } from './script';
-import styles from './styles';
-import { sx } from '../../utils/stylex';
 
 const defaultThemeVersion = '18.5'
 const attributeVersion = 'data-swiftui-ios'

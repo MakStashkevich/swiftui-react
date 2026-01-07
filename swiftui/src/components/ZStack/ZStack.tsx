@@ -13,7 +13,7 @@ import { sx } from '../../utils/stylex';
 import { sxChild } from '../../utils/stylex/children';
 
 export const ZStack: React.FC<ZStackProps> = ({
-  alignment = 'center',
+  alignment = 'leading',
   children,
   style,
   className,
@@ -43,9 +43,9 @@ export const ZStack: React.FC<ZStackProps> = ({
   };
 
   return (
-    <div {...sx(styles.container, className)}>
+    <div {...sx(styles.container, className, {style: { ...style, ...modifierStyles }})}>
       {
-        sxChild(children, {style: { ...style, ...modifierStyles, ...{gridArea: '1/1/1/1'} }})
+        sxChild(children, {style: { ...{gridArea: '1/1/1/1'} }})
           .render()
       }
     </div>

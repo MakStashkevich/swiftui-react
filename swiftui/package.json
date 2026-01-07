@@ -18,7 +18,7 @@
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "cross-env NODE_ENV=production rollup -c rollup.config.mjs",
-    "dev": "cross-env NODE_ENV=development rollup -c rollup.config.mjs --watch"
+    "dev": "cross-env NODE_ENV=development rollup -c -w --no-cache"
   },
   "keywords": [
     "react",
@@ -36,6 +36,7 @@
     "@bradleyhodges/sfsymbols-types": "*",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@stylexjs/babel-plugin": "^0.17.0",
     "@stylexjs/rollup-plugin": "^0.17.0",
     "@stylexjs/stylex": "^0.17.0",

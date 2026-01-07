@@ -11,6 +11,7 @@ import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
 import { fontHeightDefaultSubtitle, fontSizeDefaultSubtitle, textColorDefaultSubtitle, fontLetterSpacingDefaultSubtitle } from '../../utils/stylex/themes';
 import { sxChild } from '../../utils/stylex/children';
+import { spacing } from '../../utils/stylex/tokens.stylex';
 
 export const Section: React.FC<SectionProps> = ({
   children,
@@ -44,7 +45,7 @@ export const Section: React.FC<SectionProps> = ({
 
   return (
     <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
-      {header && <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{header}</div>}
+      <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{header}</div>
       <div {...sx(styles.content)}>
         {
           sxChild(children)
@@ -72,11 +73,28 @@ export const Section: React.FC<SectionProps> = ({
                       }
                     }
                   }
+                } else if (childType.name === 'VStack' || childType.displayName === 'VStack') {
+                  const childrenWithStyles = React.Children.map((child as React.ReactElement<any>).props.children, (grandchild, grandIndex) => {
+                    if (React.isValidElement(grandchild) && typeof grandchild.type !== 'string') {
+                      const grandChildType = grandchild.type as any;
+                      if ((grandChildType.name === 'Toggle' || grandChildType.displayName === 'Toggle') && grandIndex !== 0) {
+                        return React.cloneElement(grandchild, { ...(grandchild.props as any), style: { marginTop: spacing.cellBlock } });
+                      }
+                    }
+                    return grandchild;
+                  });
+                  content = React.cloneElement(
+                    child,
+                    { ...(child as React.ReactElement<any>).props },
+                    ...childrenWithStyles
+                  );
                 }
               }
 
+              const rowStyle = i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast;
+
               return (
-                <div {...sx(styles.row, (i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast))}>
+                <div {...sx(styles.row, rowStyle as any)}>
                   <div {...sx(styles.rowLine)}>
                     {/* Icon */}
                     {icon && (
@@ -97,7 +115,7 @@ export const Section: React.FC<SectionProps> = ({
             })
         }
       </div>
-      {footer && <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>}
+      <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>
     </section>
   );
 };

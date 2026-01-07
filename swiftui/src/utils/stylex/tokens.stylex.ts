@@ -5,6 +5,8 @@ export const color = stylex.defineVars({
   secondaryBg: 'var(--swiftui-secondary-bg-color)',
   sectionBg: 'var(--swiftui-section-bg-color)',
   sectionSeparator: 'var(--swiftui-section-separator-color)',
+  green: 'var(--swiftui-green-color)',
+  gray: 'var(--swiftui-gray-color)',
 });
 
 export const textColor = stylex.defineVars({
@@ -25,6 +27,7 @@ export const spacing = stylex.defineVars({
   sectionFooterInline: 'var(--swiftui-section-footer-inline-padding)',
   cellBlock: 'var(--swiftui-cell-block-padding)',
   cellInline: 'var(--swiftui-cell-inline-padding)',
+  cellTextBlock: 'var(--swiftui-cell-text-block-padding)',
   cellImageLeft: 'var(--swiftui-cell-image-left-padding)',
   cellImageRight: 'var(--swiftui-cell-image-right-padding)',
   stackGapBlock: 'var(--swiftui-stack-gap-block)',
