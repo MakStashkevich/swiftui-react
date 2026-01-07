@@ -19,7 +19,7 @@ const clientDirectivePlugin = () => {
       const clientHooks = ['useState', 'useRef', 'useLayoutEffect', 'useEffect', 'useCallback', 'useMemo'];
       const needsClientDirective = clientHooks.some(hook => code.includes(hook));
 
-      if (!needsClientDirective || code.startsWith("'use client'")) {
+      if (!needsClientDirective || code.startsWith("'use client'") || code.startsWith("'use server'")) {
         return null;
       }
 
