@@ -73,21 +73,6 @@ export const Section: React.FC<SectionProps> = ({
                       }
                     }
                   }
-                } else if (childType.name === 'VStack' || childType.displayName === 'VStack') {
-                  const childrenWithStyles = React.Children.map((child as React.ReactElement<any>).props.children, (grandchild, grandIndex) => {
-                    if (React.isValidElement(grandchild) && typeof grandchild.type !== 'string') {
-                      const grandChildType = grandchild.type as any;
-                      if ((grandChildType.name === 'Toggle' || grandChildType.displayName === 'Toggle') && grandIndex !== 0) {
-                        return React.cloneElement(grandchild, { ...(grandchild.props as any), style: { marginTop: spacing.cellBlock } });
-                      }
-                    }
-                    return grandchild;
-                  });
-                  content = React.cloneElement(
-                    child,
-                    { ...(child as React.ReactElement<any>).props },
-                    ...childrenWithStyles
-                  );
                 }
               }
 
