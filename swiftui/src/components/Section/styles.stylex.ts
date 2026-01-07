@@ -1,9 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
 import { color, spacing } from '../../utils/stylex/tokens.stylex';
 
-const minDevicePixelRatio2 = '@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx)';
-const minDevicePixelRatio3 = '@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 3dppx)';
-
 export const numbers = stylex.defineVars({
   footer_webkit_line_clamp: stylex.types.number(2),
 });
@@ -91,11 +88,7 @@ const styles = stylex.create({
             transformOrigin: 'bottom left',
             width: '100%',
             willChange: 'transform',
-            transform: {
-                default: 'scaleY(.33)',
-                [minDevicePixelRatio2]: 'scaleY(.5)',
-                [minDevicePixelRatio3]: 'scaleY(.33)',
-            },
+            transform: 'scaleY(calc(1 / var(--dpr, 1)))',
         },
         ':before': {
             backgroundColor: color.sectionSeparator,
@@ -107,11 +100,7 @@ const styles = stylex.create({
             transformOrigin: 'top left',
             width: '100%',
             willChange: 'transform',
-            transform: {
-                default: 'scaleY(.33)',
-                [minDevicePixelRatio2]: 'scaleY(.5)',
-                [minDevicePixelRatio3]: 'scaleY(.33)',
-            },
+            transform: 'scaleY(calc(1 / var(--dpr, 1)))',
         }
     },
     separatorAfterIcon: {

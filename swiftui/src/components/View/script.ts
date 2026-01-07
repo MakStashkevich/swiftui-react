@@ -89,4 +89,11 @@ export const script = (
             //
         }
     }
+
+    try {
+        const dpr = window.devicePixelRatio;
+        el.style.setProperty('--dpr', dpr.toString());
+    } catch (e) {
+        //
+    }
 }

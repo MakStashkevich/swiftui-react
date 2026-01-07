@@ -3,7 +3,6 @@
   --tabbar-current-height: var(--tabbar-height);
   --tabbar-z-index: 1000;
   --has-tabbar: 1;
-  --dpr: 2; /* todo: add from view script: const dpr = window.devicePixelRatio; */
 
   --swiftui-safe-area-inset-top: env(safe-area-inset-top, 0px);
   --swiftui-safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
