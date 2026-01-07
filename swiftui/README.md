@@ -38,30 +38,33 @@ yarn add @makstashkevich/swiftui-react
 - [x] Image
    - [x] Image
    - [x] Image on List
-   
+- [x] Toggle
+   - [x] Toggle button
+   - [x] Toggle animations
+   - [x] Toggle draggable
+
 ### In Process
 
-- [ ] Toggle
 - [ ] Click animations
-
-### Todo
+- [ ] Group
+- [ ] Label
 - [ ] Button
 - [ ] Color
+- [ ] Slider
+- [ ] Spacer
+- [ ] Stepper
+- [ ] TextField
+
+### Todo
 - [ ] ColorPicker
 - [ ] DatePicker
 - [ ] Picker
 - [ ] Divider
 - [ ] GeometryReader
-- [ ] Group
-- [ ] Label
 - [ ] Menu
 - [ ] ProgressView
 - [ ] Shape
 - [ ] SheetContent
-- [ ] Slider
-- [ ] Spacer
-- [ ] Stepper
-- [ ] TextField
 
 ## Development
 
