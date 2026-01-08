@@ -11,7 +11,12 @@ const MEDIA = '(prefers-color-scheme: dark)'
 
 const isServer = typeof window === 'undefined'
 const ViewContext = React.createContext<UseViewProps | undefined>(undefined)
-const defaultContext: UseViewProps = { setTheme: _ => { }, themes: [], setVersion: _ => { }, version: defaultThemeVersion }
+const defaultContext: UseViewProps = { 
+  setTheme: _ => { }, 
+  themes: [], 
+  setVersion: _ => { }, 
+  version: defaultThemeVersion,
+}
 
 const saveToLS = (storageKey: string, value: string) => {
   // Save to storage

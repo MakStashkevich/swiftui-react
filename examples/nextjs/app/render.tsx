@@ -1,13 +1,23 @@
 'use client';
 
 import { sfHeartFill } from '@bradleyhodges/sfsymbols';
-import { Form, Text, Section, HStack, VStack, ZStack, Image, Toggle, useBinding } from "@makstashkevich/swiftui-react";
+import { Form, Text, Section, HStack, VStack, ZStack, Image, Toggle, useBinding, ForEach, Spacer, NavigationLink, NavigationView } from "@makstashkevich/swiftui-react";
+import { useRouter } from 'next/navigation';
+
+const items = [
+    {
+        destination: '/text',
+        label: 'Text'
+    }
+];
 
 export default function HomeRender() {
     const isOnEnabled = useBinding(false);
+    const router = useRouter();
     return (
-        <Form>
-            {/* <Text>First Text</Text>
+        <NavigationView>
+            <Form>
+                {/* <Text>First Text</Text>
             <Text>Second Text</Text>
 
             <Section
@@ -67,7 +77,7 @@ export default function HomeRender() {
                 <Text>Text without Image</Text>
             </Section> */}
 
-            <Section
+                {/* <Section
                 header={<Text>Web Browser</Text>}
             >
                 <HStack>
@@ -89,7 +99,19 @@ export default function HomeRender() {
                 </ZStack>
 
                 <Toggle isOn={isOnEnabled}>Single Toggle Text</Toggle>
-            </Section>
-        </Form>
+            </Section> */}
+
+                <Section>
+                    {ForEach(items, (item, id) =>
+                        <NavigationLink onClick={() => router.push(item.destination)}>
+                            <HStack>
+                                <Text>{item.label}</Text>
+                                <Spacer />
+                            </HStack>
+                        </NavigationLink>
+                    )}
+                </Section>
+            </Form>
+        </NavigationView>
     );
 }

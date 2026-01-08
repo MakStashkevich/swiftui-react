@@ -7,6 +7,8 @@ export const color = stylex.defineVars({
   sectionSeparator: 'var(--swiftui-section-separator-color)',
   green: 'var(--swiftui-green-color)',
   gray: 'var(--swiftui-gray-color)',
+  highlight: 'var(--swiftui-highlight-color)',
+  chevron: 'var(--swiftui-chevron-color)',
 });
 
 export const textColor = stylex.defineVars({

@@ -42,10 +42,12 @@ yarn add @makstashkevich/swiftui-react
    - [x] Toggle button
    - [x] Toggle animations
    - [x] Toggle draggable
+- [x] Navigation
+   - [x] NavigationView
+   - [x] NavigationLink (with Click animations)
 
 ### In Process
 
-- [ ] Click animations
 - [ ] Group
 - [ ] Label
 - [ ] Button

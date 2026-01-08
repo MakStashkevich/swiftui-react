@@ -32,6 +32,8 @@
   --swiftui-text-color: rgb(0, 0, 0);
   --swiftui-subtitle-text-color: rgb(133, 133, 139);
   --swiftui-accent-text-color: #007aff;
+  --swiftui-highlight-color: #8e8e923d;
+  --swiftui-chevron-color: rgb(223, 223, 223);
 
   --swiftui-green-color: rgb(52, 199, 89);
   --swiftui-gray-color: rgb(233, 233, 235);
@@ -49,6 +51,8 @@
     --swiftui-text-color: rgb(255, 255, 255);
     --swiftui-subtitle-text-color: rgb(141, 141, 147);
     --swiftui-accent-text-color: #007aff;
+    --swiftui-highlight-color: #8e8e923d;
+    --swiftui-chevron-color: rgb(56, 56, 58);
 
     --swiftui-green-color: rgb(52, 199, 89);
     --swiftui-gray-color: rgb(57, 57, 61);
@@ -98,7 +102,6 @@ html.swiftui {
 }
 
 html.swiftui body {
-  background: var(--swiftui-secondary-bg-color);
   color: var(--swiftui-text-color);
   min-height: 100%;
   font-size: var(--swiftui-font-size);
@@ -111,6 +114,14 @@ html.swiftui body {
   scrollbar-width: none;
   -webkit-font-smoothing: antialiased;
   overscroll-behavior-x: none;
+}
+
+html.swiftui body div[id='root'] {
+  background: var(--swiftui-bg-color);
+}
+
+html.swiftui body div[id='root']:has([data-list-style='insetGrouped']) {
+  background: var(--swiftui-secondary-bg-color);
 }
 
 html.swiftui::-webkit-scrollbar,
@@ -205,10 +216,12 @@ html.swiftui #appView .content.show {
 
 html.swiftui #appView .content .container {
   align-items: stretch;
-  background-color: var(--tg-theme-secondary-bg-color);
   display: flex;
   flex-direction: column;
   min-height: var(--content-safe-area, 100vh);
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 html.swiftui .tabBarSpacing {

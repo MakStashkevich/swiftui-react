@@ -23,6 +23,13 @@ export * from './components/Image';
 // Toggle
 export * from './components/Toggle';
 
+// UI Utils
+export * from './components/Spacer';
+
+// Navigation
+export * from './components/NavigationView';
+export { NavigationLink } from './components/NavigationLink';
+
 // export * from './components/Button';
 // export * from './components/Color';
 // export * from './components/ColorPicker';
@@ -37,7 +44,6 @@ export * from './components/Toggle';
 // export * from './components/Shape';
 // export * from './components/SheetContent';
 // export * from './components/Slider';
-// export * from './components/Spacer';
 // export * from './components/Stepper';
 // export * from './components/TextField';
 

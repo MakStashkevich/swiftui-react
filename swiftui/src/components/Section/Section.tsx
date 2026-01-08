@@ -11,6 +11,9 @@ import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
 import { fontHeightDefaultSubtitle, fontSizeDefaultSubtitle, textColorDefaultSubtitle, fontLetterSpacingDefaultSubtitle } from '../../utils/stylex/themes';
 import { sxChild } from '../../utils/stylex/children';
+import { isListContext } from '../../utils/context/ListContext';
+import { NavigationLinkChevron, NavigationLinkHightlight } from '../NavigationLink/NavigationLink';
+import { isNavigationViewContext } from '../../utils/context/NavigationViewContext';
 
 export const Section: React.FC<SectionProps> = ({
   children,
@@ -30,6 +33,13 @@ export const Section: React.FC<SectionProps> = ({
   hidden,
   // ... другие модификаторы
 }) => {
+  // use Section only on List context
+  if (!isListContext()) {
+    return children;
+  }
+
+  const isNavigationView = isNavigationViewContext();
+
   const modifierStyles: React.CSSProperties = {
     ...getFrame(frame),
     ...getPadding(padding),
@@ -51,6 +61,7 @@ export const Section: React.FC<SectionProps> = ({
             .render((child, i, len) => {
               let icon: React.ReactNode = null;
               let content: React.ReactNode = child;
+              let isNavigationLink: boolean = false;
 
               if (React.isValidElement(child)) {
                 const childType = child.type as any;
@@ -71,6 +82,8 @@ export const Section: React.FC<SectionProps> = ({
                       }
                     }
                   }
+                } else if (childType.name === 'NavigationLink' || childType.displayName === 'NavigationLink') {
+                  isNavigationLink = true;
                 }
               }
 
@@ -89,8 +102,14 @@ export const Section: React.FC<SectionProps> = ({
                       <div {...sx(styles.block)}>
                         {/* body */}
                         {content}
+                        {isNavigationView && isNavigationLink && (
+                          <NavigationLinkChevron />
+                        )}
                       </div>
                     </div>
+                    {isNavigationView && isNavigationLink && (
+                      <NavigationLinkHightlight id={i}/>
+                    )}
                   </div>
                 </div>
               );

@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import { spacing } from '../../utils/stylex/tokens.stylex';
+import { color, spacing } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
   container: {
@@ -12,8 +12,15 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: spacing.listGap,
-    '--on-list': 1,
   },
+  insetGrouped: {
+    backgroundColor: color.secondaryBg,
+  },
+  space: {
+    flexGrow: 1,
+    width: '100%',
+    height: '100%',
+  }
 });
 
 export default styles;
