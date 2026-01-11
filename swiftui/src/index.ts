@@ -25,13 +25,13 @@ export * from './components/Toggle';
 
 // UI Utils
 export * from './components/Spacer';
+export * from './components/Color';
 
 // Navigation
 export * from './components/NavigationView';
 export { NavigationLink } from './components/NavigationLink';
 
 // export * from './components/Button';
-// export * from './components/Color';
 // export * from './components/ColorPicker';
 // export * from './components/DatePicker';
 // export * from './components/Picker';
@@ -52,6 +52,7 @@ export * from './utils/onBaseEvent';
 export * from './utils/alert';
 export * from './utils/alignments';
 export * from './utils/border';
+export * from './utils/clipShape';
 export * from './utils/cornerRadius';
 export * from './utils/filters';
 export * from './utils/fonts';
@@ -63,3 +64,6 @@ export * from './utils/transform';
 
 // Hooks
 export * from './hooks/useBinding';
+export * from './hooks/usePrevious';
+export * from './hooks/useInteraction';
+export * from './hooks/useMounted';

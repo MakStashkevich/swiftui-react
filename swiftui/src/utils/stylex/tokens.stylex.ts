@@ -3,6 +3,8 @@ import * as stylex from '@stylexjs/stylex';
 export const color = stylex.defineVars({
   bg: 'var(--swiftui-bg-color)',
   secondaryBg: 'var(--swiftui-secondary-bg-color)',
+  navigationBar: 'var(--swiftui-navigation-bar-color)',
+  navigationBarSeparator: 'var(--swiftui-navigation-bar-separator-color)',
   sectionBg: 'var(--swiftui-section-bg-color)',
   sectionSeparator: 'var(--swiftui-section-separator-color)',
   green: 'var(--swiftui-green-color)',

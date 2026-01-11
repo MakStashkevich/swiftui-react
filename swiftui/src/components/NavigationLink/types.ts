@@ -1,10 +1,14 @@
-import { MouseEventHandler, PropsWithChildren } from 'react';
+import { MouseEventHandler, ReactElement } from 'react';
 
 export type NavigationLinkProps = {
-  id?: number;
+  _id?: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
-} & PropsWithChildren;
+  label: string | ReactElement;
+
+  // todo: add multiple views logic
+  destination?: ReactElement;
+};
 
 export type NavigationLinkHightlightProps = {
-  id: number;
+  id: string;
 }

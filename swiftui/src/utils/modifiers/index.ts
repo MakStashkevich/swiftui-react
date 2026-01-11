@@ -183,8 +183,12 @@ export interface Modifiers {
   textInputAutocapitalization?: 'never' | 'words' | 'sentences' | 'characters';
   autocorrectionDisabled?: boolean;
 
+  foregroundColor?: Color;
+
   // Image
   resizable?: boolean;
+  scaledToFit?: boolean;
+  scaledToFill?: boolean;
   imageScale?: 'small' | 'medium' | 'large';
   symbolRenderingMode?:
     | 'palette'
@@ -313,11 +317,27 @@ export function mapToNativeModifiers(modifiers: Modifiers) {
 
 export function getSizeFromModifiers(
   modifiers: Modifiers,
-  defaultSize?: { width: number; height: number }
+  defaultSize?: { width: number; height: number },
+  _isImage?: boolean,
 ): React.CSSProperties {
+  const isImage = _isImage ?? false;
   modifiers = getExperimentalPrivateModifiers(modifiers);
 
   const styles: React.CSSProperties = {};
+  
+  if (isImage && !modifiers.resizable) {
+    return styles;
+  }
+
+  if (isImage) {
+    if (modifiers.scaledToFit) {
+      styles.objectFit = 'contain';
+    } else if (modifiers.scaledToFill) {
+      styles.objectFit = 'cover';
+    } else {
+      styles.objectFit = 'fill';
+    }
+  }
 
   let width = (modifiers.frame as any)?.width || defaultSize?.width;
   let height = (modifiers.frame as any)?.height || defaultSize?.height;
@@ -379,6 +399,8 @@ export function getSizeFromModifiers(
       styles.paddingRight = modifiers.padding.trailing;
     }
   }
+
+  console.log(styles);
 
   return styles;
 }

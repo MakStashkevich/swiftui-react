@@ -11,7 +11,7 @@ const items = [
     }
 ];
 
-export default function HomeRender() {
+export default function HomeView() {
     const isOnEnabled = useBinding(false);
     const router = useRouter();
     return (
@@ -103,12 +103,15 @@ export default function HomeRender() {
 
                 <Section>
                     {ForEach(items, (item, id) =>
-                        <NavigationLink onClick={() => router.push(item.destination)}>
-                            <HStack>
-                                <Text>{item.label}</Text>
-                                <Spacer />
-                            </HStack>
-                        </NavigationLink>
+                        <NavigationLink
+                            label={
+                                <HStack>
+                                    <Text>{item.label}</Text>
+                                    <Spacer />
+                                </HStack>
+                            }
+                            onClick={() => router.push(item.destination)}
+                        />
                     )}
                 </Section>
             </Form>

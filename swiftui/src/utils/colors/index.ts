@@ -23,6 +23,17 @@ export type Color =
   | (string & {});
 
 export const getBackgroundColor = (backgroundColor?: string) => {
- if (backgroundColor === undefined) return null;
- return { backgroundColor };
+  if (backgroundColor === undefined) return null;
+  return { backgroundColor };
 };
+
+export const getForegroundColor = (foregroundColor?: string) => {
+  if (foregroundColor === undefined) return null;
+  switch (foregroundColor) {
+    case 'accentColor':
+      foregroundColor = 'var(--swiftui-accent-text-color)';
+      break;
+    // todo: add other theme colors
+  }
+  return { color: foregroundColor };
+}

@@ -9,7 +9,7 @@ export const wrapChildrenInSections = (children: React.ReactNode) => {
     childrenArray.forEach((child) => {
         if (React.isValidElement(child) && (child.type as any).name === 'Section') {
             if (currentGroup.length > 0) {
-                newChildren.push(<Section>{currentGroup}</Section>);
+                newChildren.push(<Section key={`section-${newChildren.length}`}>{currentGroup}</Section>);
                 currentGroup = [];
             }
             newChildren.push(child);
@@ -19,7 +19,7 @@ export const wrapChildrenInSections = (children: React.ReactNode) => {
     });
 
     if (currentGroup.length > 0) {
-        newChildren.push(<Section>{currentGroup}</Section>);
+        newChildren.push(<Section key={`section-${newChildren.length}`}>{currentGroup}</Section>);
     }
 
     return newChildren;

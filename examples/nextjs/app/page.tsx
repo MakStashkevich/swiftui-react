@@ -1,7 +1,8 @@
-import HomeRender from "./render";
 
-export default function HomePage() {
-  return (
-    <HomeRender/>
-  );
+'use client';
+
+import MainView from './MainView';
+
+export default function Home() {
+  return <MainView />;
 }

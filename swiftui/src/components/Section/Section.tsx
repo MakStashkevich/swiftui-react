@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { SectionProps } from './types';
 import styles from './styles.stylex';
 
@@ -59,59 +59,13 @@ export const Section: React.FC<SectionProps> = ({
         {
           sxChild(children)
             .render((child, i, len) => {
-              let icon: React.ReactNode = null;
-              let content: React.ReactNode = child;
-              let isNavigationLink: boolean = false;
-
-              if (React.isValidElement(child)) {
-                const childType = child.type as any;
-                if (childType.name === 'HStack' || childType.displayName === 'HStack') {
-                  const childrenArray = React.Children.toArray((child as React.ReactElement<any>).props.children);
-                  if (childrenArray.length > 0) {
-                    const firstChild = childrenArray[0];
-                    if (React.isValidElement(firstChild) && typeof firstChild.type !== 'string') {
-                      const type = firstChild.type as any;
-                      if (type.name === 'Image' || type.displayName === 'Image') {
-                        icon = firstChild;
-                        const restChildren = childrenArray.slice(1);
-                        content = React.cloneElement(
-                          child,
-                          { ...(child as React.ReactElement<any>).props },
-                          ...restChildren
-                        );
-                      }
-                    }
-                  }
-                } else if (childType.name === 'NavigationLink' || childType.displayName === 'NavigationLink') {
-                  isNavigationLink = true;
-                }
-              }
-
-              const rowStyle = i + 1 < len ? styles.contentChildrenAll : styles.contentChildrenLast;
               return (
-                <div {...sx(styles.row, rowStyle as any)}>
-                  <div {...sx(styles.rowLine)}>
-                    {/* Icon */}
-                    {icon && (
-                      <div {...sx(styles.cellImage)}>
-                        {icon}
-                      </div>
-                    )}
-                    {/* Text & shevron */}
-                    <div {...sx(styles.separator, (icon ? styles.separatorAfterIcon : null))}>
-                      <div {...sx(styles.block)}>
-                        {/* body */}
-                        {content}
-                        {isNavigationView && isNavigationLink && (
-                          <NavigationLinkChevron />
-                        )}
-                      </div>
-                    </div>
-                    {isNavigationView && isNavigationLink && (
-                      <NavigationLinkHightlight id={i}/>
-                    )}
-                  </div>
-                </div>
+                <SectionRow
+                  key={i}
+                  child={child}
+                  isNavigationView={isNavigationView}
+                  isLast={i + 1 >= len}
+                />
               );
             })
         }
@@ -120,3 +74,70 @@ export const Section: React.FC<SectionProps> = ({
     </section>
   );
 };
+
+interface SectionRowProps {
+  child: React.ReactNode;
+  isNavigationView: boolean;
+  isLast: boolean;
+}
+
+const SectionRow: React.FC<SectionRowProps> = ({ child, isNavigationView, isLast }) => {
+  const id = useId();
+  let icon: React.ReactNode = null;
+  let content: React.ReactNode = child;
+  let isNavigationLink: boolean = false;
+
+  if (React.isValidElement(child)) {
+    const childWithId = React.cloneElement(child, { ...(child.props || {}), _id: id } as any);
+    content = childWithId;
+
+    const childType = child.type as any;
+    if (childType.name === 'HStack' || childType.displayName === 'HStack') {
+      const childrenArray = React.Children.toArray((child as React.ReactElement<any>).props.children);
+      if (childrenArray.length > 0) {
+        const firstChild = childrenArray[0];
+        if (React.isValidElement(firstChild) && typeof firstChild.type !== 'string') {
+          const type = firstChild.type as any;
+          if (type.name === 'Image' || type.displayName === 'Image') {
+            icon = firstChild;
+            const restChildren = childrenArray.slice(1);
+            content = React.cloneElement(
+              childWithId,
+              { ...(childWithId.props || {}) },
+              ...restChildren
+            );
+          }
+        }
+      }
+    } else if (childType.name === 'NavigationLink' || childType.displayName === 'NavigationLink') {
+      isNavigationLink = true;
+    }
+  }
+
+  const rowStyle = !isLast ? styles.contentChildrenAll : styles.contentChildrenLast;
+  return (
+    <div {...sx(styles.row, rowStyle as any)}>
+      <div {...sx(styles.rowLine)}>
+        {/* Icon */}
+        {icon && (
+          <div {...sx(styles.cellImage)}>
+            {icon}
+          </div>
+        )}
+        {/* Text & shevron */}
+        <div {...sx(styles.separator, (icon ? styles.separatorAfterIcon : null))}>
+          <div {...sx(styles.block)}>
+            {/* body */}
+            {content}
+            {isNavigationView && isNavigationLink && (
+              <NavigationLinkChevron />
+            )}
+          </div>
+        </div>
+        {isNavigationView && isNavigationLink && (
+          <NavigationLinkHightlight id={id} />
+        )}
+      </div>
+    </div>
+  );
+}

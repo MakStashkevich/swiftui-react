@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useId, useRef } from 'react';
 import { ToggleProps } from './types';
 import styles from './styles';
 
@@ -12,8 +12,10 @@ import { sx } from '../../utils/stylex';
 import { useBinding } from '../../hooks/useBinding';
 import { useEffect } from 'react';
 import { Text } from '../Text';
+import { getBackgroundColor } from '../../utils/colors';
 
 export const Toggle: React.FC<ToggleProps> = ({
+  label,
   children,
   isOn,
   onChange,
@@ -29,6 +31,7 @@ export const Toggle: React.FC<ToggleProps> = ({
   opacity,
   hidden,
   disabled,
+  tint,
   // ... другие модификаторы
 }) => {
   const [hover, setHover] = React.useState(false);
@@ -39,6 +42,7 @@ export const Toggle: React.FC<ToggleProps> = ({
   const touchStartTime = useRef(0);
   const [isSwiping, setIsSwiping] = React.useState(false);
   const tempIsOn = useBinding(isOn.value);
+  const toggleId = useId();
 
   useEffect(() => {
     tempIsOn.setValue(isOn.value);
@@ -53,7 +57,6 @@ export const Toggle: React.FC<ToggleProps> = ({
 
   const handlePressStart = () => {
     clearActiveTimeout();
-    // tempIsOn.setValue(isOn.value);
     activeTimeout.current = setTimeout(() => {
       setActive(true);
     }, 500);
@@ -114,22 +117,25 @@ export const Toggle: React.FC<ToggleProps> = ({
 
   return (
     <div {...sx(styles.container)} style={{ ...style, ...modifierStyles }}>
-      {children && <Text>{children}</Text>}
+      {/* Label */}
+      {label ? <Text>{label}</Text> : children}
       <div>
         <input
           {...sx(styles.input)}
           type="checkbox"
-          id="toggle"
+          id={toggleId}
           checked={tempIsOn.value}
           disabled={disabled}
           onChange={() => handleOnChange(!tempIsOn.value)}
         />
 
         <label
-          htmlFor="toggle"
+          htmlFor={toggleId}
           {...sx(
             styles.label,
-            tempIsOn.value && styles.inputCheckedLabel,
+            tempIsOn.value && (
+              tint ? { style: getBackgroundColor(tint) } : styles.inputCheckedLabel
+            ),
             active && styles.labelActive,
             tempIsOn.value && active && styles.inputCheckedLabelActive,
           )}

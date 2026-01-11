@@ -33,7 +33,6 @@ export const script = (
 
         el.classList.add('swiftui')
         el.classList.add('tabbarScrollLayout')
-        el.classList.add('isScrolled')
         setColorScheme(theme)
     }
 

@@ -10,6 +10,7 @@ import { getShadow } from '../../utils/shadow';
 import { getTransform } from '../../utils/transform';
 import { getFont } from '../../utils/fonts';
 import { sx } from '../../utils/stylex';
+import { getForegroundColor } from '../../utils/colors';
 
 export const Text: React.FC<TextProps> = ({
   children,
@@ -32,6 +33,7 @@ export const Text: React.FC<TextProps> = ({
   italic,
   strikethrough,
   underline,
+  foregroundColor,
   // ... другие модификаторы
 }) => {
   const modifierStyles: React.CSSProperties = {
@@ -47,6 +49,7 @@ export const Text: React.FC<TextProps> = ({
     ...(bold && { fontWeight: 'bold' }),
     ...(strikethrough && { textDecoration: 'line-through' }),
     ...(underline && { textDecoration: 'underline' }),
+    ...(getForegroundColor(foregroundColor))
     // ... другие стили модификаторов
   };
 

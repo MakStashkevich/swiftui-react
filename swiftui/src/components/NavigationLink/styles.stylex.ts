@@ -24,10 +24,10 @@ const styles = stylex.create({
         top: 0,
         pointerEvents: 'none',
     },
-    highlightColor: {
+    highlightPressed: {
         backgroundColor: color.highlight,
     },
-    highlightFadeAnimation: {
+    highlightUnpressed: {
         animationName: highlightFadeAnimation,
         animationDuration: '.4s',
         animationTimingFunction: 'ease',

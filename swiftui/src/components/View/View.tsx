@@ -1,6 +1,7 @@
 import React from 'react';
 import { Attribute, ViewProviderProps, ViewScriptProps, UseViewProps } from './types';
 import { script } from './script';
+import { useScrollDirection } from '../../hooks/useScrollDirection';
 
 const defaultThemeVersion = '18.5'
 const attributeVersion = 'data-swiftui-ios'
@@ -11,10 +12,10 @@ const MEDIA = '(prefers-color-scheme: dark)'
 
 const isServer = typeof window === 'undefined'
 const ViewContext = React.createContext<UseViewProps | undefined>(undefined)
-const defaultContext: UseViewProps = { 
-  setTheme: _ => { }, 
-  themes: [], 
-  setVersion: _ => { }, 
+const defaultContext: UseViewProps = {
+  setTheme: _ => { },
+  themes: [],
+  setVersion: _ => { },
   version: defaultThemeVersion,
 }
 
@@ -57,6 +58,17 @@ export const View = ({
   const [version, setThemeVersion] = React.useState(() => getSystemVersion(defaultThemeVersion))
   const [resolvedTheme, setResolvedTheme] = React.useState(() => theme === 'system' ? getSystemTheme() : theme)
   const attrs = !value ? themes : Object.values(value)
+
+  // Handle scroll
+  const scrollThreshold = 3;
+  const scrolled = useScrollDirection({ threshold: scrollThreshold });
+  React.useEffect(() => {
+    const scrollProgress = Math.max(Math.min(scrolled / scrollThreshold, 1), 0);
+    document.documentElement.style.setProperty(
+      '--gso', // global separator opacity
+      String(scrollProgress)
+    );
+  }, [scrolled, scrollThreshold]);
 
   const applyTheme = React.useCallback((theme?: string) => {
     let resolved = theme

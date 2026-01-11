@@ -1,75 +1,49 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import styles from './styles.stylex';
 
 import { sx } from '../../utils/stylex';
 import { NavigationLinkHightlightProps, NavigationLinkProps } from './types';
 import ChevronIcon from '../../icons/ChevronIcon';
 import { isNavigationViewContext, useNavigationViewContext } from '../../utils/context/NavigationViewContext';
+import { Text } from '../Text';
+import { usePrevious } from '../../hooks/usePrevious';
+import { useInteraction } from '../../hooks/useInteraction';
+import { useMounted } from '../../hooks/useMounted';
 
 export const NavigationLink: React.FC<NavigationLinkProps> = ({
-  id,
+  _id: linkId,
   onClick,
-  children,
+  label,
 }) => {
   if (
-    !isNavigationViewContext() || 
-    (id === undefined || id < 0)
+    !isNavigationViewContext() ||
+    (linkId === undefined)
   ) {
-    return children;
+    return label;
   }
-  
+
   const { setPressedItem } = useNavigationViewContext();
   const divRef = useRef<HTMLDivElement>(null);
-  const isTouchDevice = useRef<boolean>(false);
 
-  const onInteract = (value: boolean) => {
-    setPressedItem(id, value);
+  const handleOnClick = (event: any) => {
+    if (onClick) onClick(event);
   }
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      isTouchDevice.current = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-    }
+  const onInteract = (value: boolean) => {
+    setPressedItem(linkId, value);
+  }
 
-    const div = divRef.current;
-    if (!div) return;
-
-    const handleInteractionStart = (_: Event) => {
-      if (onInteract) onInteract(true);
-    };
-
-    const handleInteractionEnd = (_: Event) => {
-      if (onInteract) onInteract(false);
-    };
-
-    if (!isTouchDevice.current) {
-      div.addEventListener("mousedown", handleInteractionStart);
-      div.addEventListener("mouseup", handleInteractionEnd);
-      div.addEventListener("mouseleave", handleInteractionEnd);
-    } else {
-      div.addEventListener("touchstart", handleInteractionStart);
-      div.addEventListener("touchend", handleInteractionEnd);
-    }
-
-    return () => {
-      if (!isTouchDevice.current) {
-        div.removeEventListener("mousedown", handleInteractionStart);
-        div.removeEventListener("mouseup", handleInteractionEnd);
-        div.removeEventListener("mouseleave", handleInteractionEnd);
-      } else {
-        div.removeEventListener("touchstart", handleInteractionStart);
-        div.removeEventListener("touchend", handleInteractionEnd);
-      }
-    };
-  }, [onInteract]);
+  useInteraction({ divRef, onInteract });
 
   return (
     <div
       ref={divRef}
-      onClick={onClick}
+      onClick={handleOnClick}
       {...sx(styles.container)}
     >
-      {children}
+      {typeof label === 'string' ? (
+        <Text>{label}</Text>
+      ) : label}
     </div>
   );
 };
@@ -77,15 +51,31 @@ export const NavigationLink: React.FC<NavigationLinkProps> = ({
 export const NavigationLinkHightlight: React.FC<NavigationLinkHightlightProps> = ({
   id
 }) => {
-  if (!isNavigationViewContext()) return;
+  if (!isNavigationViewContext()) return null;
 
   const { pressedItemId } = useNavigationViewContext();
-  // todo: check first load component & hide background
-  const isPressed = pressedItemId >= 0 && pressedItemId === id;
-  const highlightBackground = isPressed ? styles.highlightColor : styles.highlightFadeAnimation;
-  return (
-    <div {...sx(styles.highlight, highlightBackground)} />
-  )
+  const isMounted = useMounted();
+  const isPressed = pressedItemId === id;
+  const wasPressed = usePrevious(isPressed);
+
+  const highlightBackground = () => {
+    // Don't show any animation on initial mount
+    if (!isMounted) {
+      return null;
+    }
+    // Show solid color when pressed
+    if (isPressed) {
+      return styles.highlightPressed;
+    }
+    // Play fade-out animation only when it was just released
+    if (!isPressed && wasPressed) {
+      return styles.highlightUnpressed;
+    }
+    // Otherwise, no background
+    return null;
+  };
+
+  return <div {...sx(styles.highlight, highlightBackground())} />;
 }
 
 export const NavigationLinkChevron: React.FC = () => {
