@@ -38,26 +38,30 @@ yarn add @makstashkevich/swiftui-react
 - [x] Image
    - [x] Image
    - [x] Image on List
+   - [x] Image modifiers (clipShape, frame, scaledToFit, scaledToFill, resizable & more)
 - [x] Toggle
    - [x] Toggle button
    - [x] Toggle animations
    - [x] Toggle draggable
+   - [x] Toggle modifiers (tint & more)
 - [x] Navigation
    - [x] NavigationView
    - [x] NavigationLink (with Click animations)
+   - [x] NavigationView modifiers (title, leading, trailing, titleDisplayMode, titleDisplayHidden & more)
+- [x] Spacer
 
 ### In Process
 
-- [ ] Group
-- [ ] Label
 - [ ] Button
-- [ ] Color
 - [ ] Slider
-- [ ] Spacer
 - [ ] Stepper
-- [ ] TextField
 
 ### Todo
+
+- [ ] Group
+- [ ] Label
+- [ ] Color
+- [ ] TextField
 - [ ] ColorPicker
 - [ ] DatePicker
 - [ ] Picker

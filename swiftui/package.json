@@ -1,6 +1,6 @@
 {
   "name": "@makstashkevich/swiftui-react",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "A plugin that brings SwiftUI design aesthetics to React (Next.js and others), without supporting React Native. Includes UI elements, components, hooks, and utilities for design modifications.",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
