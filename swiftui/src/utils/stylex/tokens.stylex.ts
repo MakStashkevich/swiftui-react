@@ -11,12 +11,14 @@ export const color = stylex.defineVars({
   gray: 'var(--swiftui-gray-color)',
   highlight: 'var(--swiftui-highlight-color)',
   chevron: 'var(--swiftui-chevron-color)',
+  accent: 'var(--swiftui-accent-color)',
+  destructive: 'var(--swiftui-destructive-color)',
+  buttonBorderedBg: 'var(--swiftui-button-bordered-bg-color)',
 });
 
 export const textColor = stylex.defineVars({
   default: 'var(--swiftui-text-color)',
   subtitle: 'var(--swiftui-subtitle-text-color)',
-  accent: 'var(--swiftui-accent-text-color)',
   sectionHeader: 'var(--swiftui-section-header-text-color)',
 });
 

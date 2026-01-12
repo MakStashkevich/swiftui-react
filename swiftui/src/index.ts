@@ -31,7 +31,9 @@ export * from './components/Color';
 export * from './components/NavigationView';
 export { NavigationLink } from './components/NavigationLink';
 
-// export * from './components/Button';
+// Buttons
+export * from './components/Button';
+
 // export * from './components/ColorPicker';
 // export * from './components/DatePicker';
 // export * from './components/Picker';
@@ -61,6 +63,7 @@ export * from './utils/frame';
 export * from './utils/padding';
 export * from './utils/shadow';
 export * from './utils/transform';
+export * from './utils/text';
 
 // Hooks
 export * from './hooks/useBinding';

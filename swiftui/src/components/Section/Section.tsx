@@ -14,6 +14,7 @@ import { sxChild } from '../../utils/stylex/children';
 import { isListContext } from '../../utils/context/ListContext';
 import { NavigationLinkChevron, NavigationLinkHightlight } from '../NavigationLink/NavigationLink';
 import { isNavigationViewContext } from '../../utils/context/NavigationViewContext';
+import { prepareTextComponent } from '../../utils/text';
 
 export const Section: React.FC<SectionProps> = ({
   children,
@@ -52,9 +53,12 @@ export const Section: React.FC<SectionProps> = ({
     // ... другие стили модификаторов
   };
 
+  const headerComponent = prepareTextComponent(header);
+  const footerComponent = prepareTextComponent(footer);
+
   return (
     <section {...sx(styles.container, className)} style={{ ...style, ...modifierStyles }}>
-      <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{header}</div>
+      <div {...sx(styles.header, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{headerComponent}</div>
       <div {...sx(styles.content)}>
         {
           sxChild(children)
@@ -70,7 +74,7 @@ export const Section: React.FC<SectionProps> = ({
             })
         }
       </div>
-      <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footer}</div>
+      <div {...sx(styles.footer, textColorDefaultSubtitle, fontSizeDefaultSubtitle, fontHeightDefaultSubtitle, fontLetterSpacingDefaultSubtitle)}>{footerComponent}</div>
     </section>
   );
 };

@@ -15,6 +15,7 @@ export default function MainView() {
           <NavigationLink label="Text" onClick={() => goto("/text")} />
           <NavigationLink label="Image" onClick={() => goto("/image")} />
           <NavigationLink label="Toggle" onClick={() => goto("/toggle")} />
+          <NavigationLink label="Button" onClick={() => goto("/button")} />
         </Section>
 
         {/* <Section header={<Text>Containers</Text>}>

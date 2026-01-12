@@ -66,10 +66,10 @@ export const NavigationView: React.FC<NavigationViewProps> = ({
         }
     }, [scrollTop, titleDisplayMode, title]);
 
-    const haveAnyParams = Boolean(title || onBack || leading || trailing);
+    const hasAnyParams = Boolean(title || onBack || leading || trailing);
     return (
         <NavigationViewProvider>
-            {haveAnyParams && (
+            {hasAnyParams && (
                 <>
                     {!titleDisplayHidden && (
                         <div {...sx(styles.titleBar)}>
@@ -126,18 +126,18 @@ const NavigationBackButton = ({ onClick, title }: NavigationBackButtonProps) => 
         isPressed.setValue(value);
     }
 
-    useInteraction({ divRef, onInteract });
+    useInteraction({ ref: divRef, onInteract });
 
     const highlightBackground = () => {
         // Don't show any animation on initial mount
         if (!isMounted) {
             return null;
         }
-        // Show solid color when pressed
+        // Show when pressed
         if (isPressed.value) {
             return styles.backButtonPressed;
         }
-        // Play fade-out animation only when it was just released
+        // Play only when it was just released
         if (!isPressed.value && wasPressed) {
             return styles.backButtonUnpressed;
         }

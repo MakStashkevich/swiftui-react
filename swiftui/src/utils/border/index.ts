@@ -1,4 +1,4 @@
-import { Color } from '../colors';
+import { Color, convertColor } from '../colors';
 import React from 'react';
 
 export type Border = {
@@ -10,7 +10,7 @@ export const getBorder = (border?: Border): React.CSSProperties | null => {
   if (!border) return null;
   return {
     ...(border.color && {
-      borderColor: border.color,
+      borderColor: convertColor(border.color),
       borderStyle: 'solid', // Добавляем стиль границы по умолчанию
     }),
     ...(border.width && { borderWidth: border.width }),

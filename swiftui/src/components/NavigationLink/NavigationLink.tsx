@@ -5,21 +5,22 @@ import { sx } from '../../utils/stylex';
 import { NavigationLinkHightlightProps, NavigationLinkProps } from './types';
 import ChevronIcon from '../../icons/ChevronIcon';
 import { isNavigationViewContext, useNavigationViewContext } from '../../utils/context/NavigationViewContext';
-import { Text } from '../Text';
 import { usePrevious } from '../../hooks/usePrevious';
 import { useInteraction } from '../../hooks/useInteraction';
 import { useMounted } from '../../hooks/useMounted';
+import { prepareTextComponent } from '../../utils/text';
 
 export const NavigationLink: React.FC<NavigationLinkProps> = ({
   _id: linkId,
   onClick,
   label,
 }) => {
+  const labelComponent = prepareTextComponent(label);
   if (
     !isNavigationViewContext() ||
     (linkId === undefined)
   ) {
-    return label;
+    return labelComponent;
   }
 
   const { setPressedItem } = useNavigationViewContext();
@@ -33,7 +34,7 @@ export const NavigationLink: React.FC<NavigationLinkProps> = ({
     setPressedItem(linkId, value);
   }
 
-  useInteraction({ divRef, onInteract });
+  useInteraction({ ref: divRef, onInteract });
 
   return (
     <div
@@ -41,9 +42,7 @@ export const NavigationLink: React.FC<NavigationLinkProps> = ({
       onClick={handleOnClick}
       {...sx(styles.container)}
     >
-      {typeof label === 'string' ? (
-        <Text>{label}</Text>
-      ) : label}
+      {labelComponent}
     </div>
   );
 };

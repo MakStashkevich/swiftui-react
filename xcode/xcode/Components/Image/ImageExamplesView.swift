@@ -17,6 +17,7 @@ struct ImageExamplesView: View {
                                 .clipShape(Circle()))
         }
         .navigationTitle("Image Examples")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -11,8 +11,8 @@ import { getTransform } from '../../utils/transform';
 import { sx } from '../../utils/stylex';
 import { useBinding } from '../../hooks/useBinding';
 import { useEffect } from 'react';
-import { Text } from '../Text';
 import { getBackgroundColor } from '../../utils/colors';
+import { prepareTextComponent } from '../../utils/text';
 
 export const Toggle: React.FC<ToggleProps> = ({
   label,
@@ -115,10 +115,12 @@ export const Toggle: React.FC<ToggleProps> = ({
     // ... другие стили модификаторов
   };
 
+  const labelComponent = prepareTextComponent(label) ?? children;
+
   return (
     <div {...sx(styles.container)} style={{ ...style, ...modifierStyles }}>
       {/* Label */}
-      {label ? <Text>{label}</Text> : children}
+      {labelComponent}
       <div>
         <input
           {...sx(styles.input)}

@@ -43,7 +43,7 @@ export const VStack: React.FC<VStackProps> = ({
   };
 
   const inlineStyle: React.CSSProperties = {
-    gap: spacing !== undefined ? `${spacing}px` : undefined,
+    gap: spacing !== undefined ? `${spacing}pt` : undefined,
     ...style,
     ...modifierStyles,
   };

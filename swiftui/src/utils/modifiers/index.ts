@@ -2,6 +2,21 @@ import React from 'react';
 import { Color } from '../colors';
 import { BlendMode, ClipShape } from '../filters';
 
+// sfSymbols packet
+import { IconDefinition as sfSymbol } from '@bradleyhodges/sfsymbols-types';
+
+// Nextjs Image Static style
+type ImageStatic = {
+  src: string;
+  height?: number;
+  width?: number;
+  blurDataURL?: string;
+  blurWidth?: number;
+  blurHeight?: number;
+};
+
+export type SystemImageName = sfSymbol | ImageStatic | string;
+
 export type LinearGradient = {
   linearGradient: {
     colors: Color[];
@@ -120,6 +135,8 @@ export interface Modifiers {
   environment?: {
     colorScheme: 'light' | 'dark';
   };
+  // Button
+  controlSize?: 'large' | 'small' | 'regular' | 'extraLarge' | 'mini';
   // TextField
   textContentType?:
     | 'name'
@@ -238,7 +255,7 @@ export interface Modifiers {
       };
 
   // Style Variants
-  buttonStyle?: 'bordered' | 'borderless' | 'plain' | 'borderedProminent';
+  buttonStyle?: 'automatic' | 'bordered' | 'borderless' | 'plain' | 'borderedProminent';
   pickerStyle?: 'wheel' | 'segmented' | 'menu';
   textFieldStyle?: 'plain' | 'roundedBorder';
   listStyle?: 'automatic' | 'inset' | 'grouped' | 'plain' | 'insetGrouped';

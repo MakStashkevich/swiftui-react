@@ -1,9 +1,10 @@
-import { CSSProperties, PropsWithChildren, ReactNode } from 'react';
+import { CSSProperties, PropsWithChildren } from 'react';
 import { Modifiers } from '../../utils/modifiers';
+import { UIText } from '../../utils/text';
 
 export type SectionProps = {
-  header?: ReactNode;
-  footer?: ReactNode;
+  header?: UIText;
+  footer?: UIText;
   className?: string;
   style?: CSSProperties;
 } & PropsWithChildren & Modifiers;

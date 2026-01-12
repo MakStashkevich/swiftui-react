@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import { color, spacing, textColor } from '../../utils/stylex/tokens.stylex';
+import { color, spacing } from '../../utils/stylex/tokens.stylex';
 
 const styles = stylex.create({
     titleBottom: {
@@ -96,7 +96,7 @@ const styles = stylex.create({
         display: 'flex',
         flexDirection: 'row',
         gap: '6.5pt',
-        color: textColor.accent,
+        color: color.accent,
         alignItems: 'center',
         cursor: 'pointer',
     },

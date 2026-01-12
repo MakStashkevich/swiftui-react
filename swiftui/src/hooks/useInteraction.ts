@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 
 interface UseInteractionProps {
-  divRef: React.RefObject<HTMLDivElement | null>;
+  ref: React.RefObject<HTMLDivElement | HTMLButtonElement | null>;
   onInteract?: (isInteracting: boolean) => void;
 }
 
@@ -11,7 +11,7 @@ interface UseInteractionProps {
  * It handles both mouse and touch events to determine if the user is interacting.
  *
  * @param {object} props - The properties for the hook.
- * @param {React.RefObject<HTMLDivElement | null>} props.divRef - A ref to the div element to monitor for interactions.
+ * @param {React.RefObject<HTMLDivElement | HTMLButtonElement | null>} props.ref - A ref to the div element to monitor for interactions.
  * @param {(isInteracting: boolean) => void} [props.onInteract] - An optional callback function that is called when the interaction state changes. It receives a boolean value: `true` on interaction start (mousedown/touchstart) and `true` on interaction end (mouseup/touchend).
  *
  * @example
@@ -36,7 +36,7 @@ interface UseInteractionProps {
  * };
  * ```
  */
-export const useInteraction = ({ divRef, onInteract }: UseInteractionProps) => {
+export const useInteraction = ({ ref, onInteract }: UseInteractionProps) => {
   const isTouchDevice = useRef<boolean>(false);
 
   useEffect(() => {
@@ -44,8 +44,8 @@ export const useInteraction = ({ divRef, onInteract }: UseInteractionProps) => {
       isTouchDevice.current = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     }
 
-    if (!divRef || !divRef.current) return;
-    const div = divRef.current;
+    if (!ref || !ref.current) return;
+    const div = ref.current;
 
     const handleInteractionStart = (_: Event) => {
       if (onInteract) onInteract(true);
@@ -74,5 +74,5 @@ export const useInteraction = ({ divRef, onInteract }: UseInteractionProps) => {
         div.removeEventListener("touchend", handleInteractionEnd);
       }
     };
-  }, [onInteract, divRef]);
+  }, [onInteract, ref]);
 };
